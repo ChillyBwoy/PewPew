@@ -7,7 +7,7 @@ namespace PewPew.Systems
     sealed class PlayerJumpSendEventSystem : IEcsRunSystem
     {
 
-        private readonly EcsFilter<PlayerTag, JumpComponent> playerFilter = null;
+        private readonly EcsFilter<PlayerComponent, JumpComponent> playerFilter = null;
         public void Run()
         {
             if (!Input.GetKeyDown(KeyCode.Space)) return;

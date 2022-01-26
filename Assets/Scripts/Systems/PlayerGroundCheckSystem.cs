@@ -6,7 +6,7 @@ namespace PewPew.Systems
 {
     sealed class PlayerGroundCheckSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag, GroundCheckSphereComponent> groundFilter = null;
+        private readonly EcsFilter<PlayerComponent, GroundCheckSphereComponent> groundFilter = null;
         public void Run()
         {
             foreach (var i in groundFilter)

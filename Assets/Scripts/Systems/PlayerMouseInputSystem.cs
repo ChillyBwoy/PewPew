@@ -8,7 +8,7 @@ namespace PewPew.Systems
 
     sealed class PlayerMouseInputSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag, MouseLookDirectionComponent> playerFilter = null;
+        private readonly EcsFilter<PlayerComponent, MouseLookDirectionComponent> playerFilter = null;
 
         private float axisX;
         private float axisY;

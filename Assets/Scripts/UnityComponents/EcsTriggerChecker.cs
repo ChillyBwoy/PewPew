@@ -1,6 +1,4 @@
 using UnityEngine;
-using Voody.UniLeo;
-using PewPew.Components;
 
 namespace PewPew.UnityComponents
 {
@@ -11,10 +9,12 @@ namespace PewPew.UnityComponents
         {
             if (!other.CompareTag(targetTag)) return;
 
-            WorldHandler.GetWorld().SendMessage(new DebugMessageRequestComponent()
-            {
-                message = "Player is here"
-            });
+            Debug.Log("Player enters the collider");
+
+            // WorldHandler.GetWorld().SendMessage(new DebugMessageRequestComponent()
+            // {
+            //     message = "Player is here"
+            // });
         }
     }
 }

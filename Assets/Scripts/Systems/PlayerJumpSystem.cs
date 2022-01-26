@@ -4,10 +4,9 @@ using PewPew.Components;
 
 namespace PewPew.Systems
 {
-
     sealed class PlayerJumpSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag, GroundCheckSphereComponent, JumpComponent, JumpEvent>.Exclude<BlockJumpDurationComponent> jumpFilter = null;
+        private readonly EcsFilter<PlayerComponent, GroundCheckSphereComponent, JumpComponent, JumpEvent>.Exclude<BlockJumpDurationComponent> jumpFilter = null;
         public void Run()
         {
             foreach (var i in jumpFilter)

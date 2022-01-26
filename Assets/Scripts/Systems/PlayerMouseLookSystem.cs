@@ -7,8 +7,8 @@ namespace PewPew.Systems
 
     sealed class PlayerMouseLookSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag> playerFilter = null;
-        private readonly EcsFilter<PlayerTag, ModelComponent, MouseLookDirectionComponent> mouseLookFilter = null;
+        private readonly EcsFilter<PlayerComponent> playerFilter = null;
+        private readonly EcsFilter<PlayerComponent, ModelComponent, MouseLookDirectionComponent, CameraComponent> mouseLookFilter = null;
         private Quaternion startTransformRotation;
 
         public void Init()
@@ -27,6 +27,7 @@ namespace PewPew.Systems
             {
                 ref var modelComponent = ref mouseLookFilter.Get2(i);
                 ref var lookComponent = ref mouseLookFilter.Get3(i);
+                ref var cameraComponent = ref mouseLookFilter.Get4(i);
 
                 var axisX = lookComponent.direction.x;
                 var axisY = lookComponent.direction.y;
@@ -35,7 +36,7 @@ namespace PewPew.Systems
                 var rotateY = Quaternion.AngleAxis(axisY, Vector3.right * Time.deltaTime * lookComponent.mouseSensitivity);
 
                 modelComponent.modelTransform.rotation = startTransformRotation * rotateX;
-                lookComponent.cameraTransform.rotation = modelComponent.modelTransform.rotation * rotateY;
+                cameraComponent.cameraTransform.rotation = modelComponent.modelTransform.rotation * rotateY;
             }
         }
     }

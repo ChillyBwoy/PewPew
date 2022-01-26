@@ -8,7 +8,7 @@ namespace PewPew.Systems
 
     sealed class PlayerMovableInputSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag, DirectionComponent> directionFilter = null;
+        private readonly EcsFilter<PlayerComponent, DirectionComponent> directionFilter = null;
 
         private float moveX;
         private float moveZ;

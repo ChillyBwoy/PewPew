@@ -1,6 +1,5 @@
 using UnityEngine;
 using Leopotam.Ecs;
-using Voody.UniLeo;
 
 using PewPew.Components;
 using PewPew.Systems;
@@ -10,23 +9,25 @@ namespace PewPew
 {
     sealed class EcsStartup : MonoBehaviour
     {
-        private EcsWorld _world = null;
-        private EcsSystems _systems = null;
+        private EcsWorld world = null;
+        private EcsSystems updateSystems = null;
+        private EcsSystems lateUpdateSystems = null;
         public SceneData sceneData;
 
         void Start()
         {
-            _world = new EcsWorld();
-            _systems = new EcsSystems(_world);
+            world = new EcsWorld();
+            updateSystems = new EcsSystems(world);
+            lateUpdateSystems = new EcsSystems(world);
 
 #if UNITY_EDITOR
-            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
-            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
+            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(world);
+            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(updateSystems);
 #endif
 
-            _systems
-                .ConvertScene() // required by Voody.UniLeo
+            updateSystems
                 .OneFrame<JumpEvent>()
+                .Add(new PlayerInitSystem())
                 .Add(new DebugSystem())
                 .Add(new JumpBlockSystem())
                 .Add(new CursorLockSystem())
@@ -39,22 +40,33 @@ namespace PewPew
                 .Add(new MovementSystem())
                 .Inject(sceneData)
                 .Init();
+
+            lateUpdateSystems
+                .Add(new PlayerCameraSystem())
+                .Inject(sceneData)
+                .Init();
         }
 
-        void Update()
+        private void LateUpdate()
         {
-            _systems?.Run();
+            lateUpdateSystems?.Run();
+        }
+
+        private void Update()
+        {
+            updateSystems?.Run();
         }
 
         void OnDestroy()
         {
-            if (_systems != null)
-            {
-                _systems.Destroy();
-                _systems = null;
-                _world.Destroy();
-                _world = null;
-            }
+            updateSystems?.Destroy();
+            updateSystems = null;
+
+            lateUpdateSystems?.Destroy();
+            lateUpdateSystems = null;
+
+            world.Destroy();
+            world = null;
         }
     }
 }
