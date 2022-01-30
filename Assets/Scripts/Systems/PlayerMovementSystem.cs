@@ -5,7 +5,8 @@ using PewPew.Components;
 
 namespace PewPew.Systems
 {
-    sealed class MovementSystem : IEcsRunSystem
+
+    sealed class PlayerMovementSystem : IEcsRunSystem
     {
         private readonly EcsFilter<ModelComponent, MovableComponent, DirectionComponent> movableFilter = null;
 

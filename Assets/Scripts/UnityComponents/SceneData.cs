@@ -6,6 +6,8 @@ namespace PewPew.UnityComponents
     {
         public GameObject playerPrefab;
         public Transform playerSpawnPoint;
+        public GameObject enemyPrefab;
+        public Transform enemySpawnPoint;
         public Camera mainCamera;
     }
 }

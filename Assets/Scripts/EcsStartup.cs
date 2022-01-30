@@ -37,12 +37,14 @@ namespace PewPew
                 .Add(new PlayerGroundCheckSystem())
                 .Add(new PlayerJumpSendEventSystem())
                 .Add(new PlayerJumpSystem())
-                .Add(new MovementSystem())
+                .Add(new PlayerMovementSystem())
                 .Inject(sceneData)
                 .Init();
 
             lateUpdateSystems
                 .Add(new PlayerCameraSystem())
+                .Add(new EnemyInitSystem())
+                .Add(new EnemyMovementSystem())
                 .Inject(sceneData)
                 .Init();
         }
