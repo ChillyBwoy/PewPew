@@ -30,12 +30,15 @@ namespace PewPew.Systems
             );
 
             PlayerData playerData = go.GetComponent<PlayerData>();
+            MovableData movableData = go.GetComponent<MovableData>();
+            GroundCheckData groundCheckData = go.GetComponent<GroundCheckData>();
+            JumpData jumpData = go.GetComponent<JumpData>();
 
             playerComponent.lookAt = playerData.playerLookAt;
 
-            movableComponent.characterController = playerData.characterController;
-            movableComponent.speed = playerData.speed;
-            movableComponent.gravity = playerData.gravity;
+            movableComponent.characterController = movableData.characterController;
+            movableComponent.speed = movableData.speed;
+            movableComponent.gravity = movableData.gravity;
 
             modelComponent.modelTransform = go.transform;
 
@@ -49,12 +52,12 @@ namespace PewPew.Systems
             cameraComponent.cameraVerticalOffset = playerData.cameraVerticalOffset;
             cameraComponent.cameraState = CameraComponent.CameraState.FirstPerson;
 
-            groundCheckSphereComponent.groundCheckSphere = playerData.groundCheckSphere;
-            groundCheckSphereComponent.groundDistance = playerData.groundDistance;
-            groundCheckSphereComponent.groundMask = playerData.groundMask;
+            groundCheckSphereComponent.groundCheckSphere = groundCheckData.groundCheckSphere;
+            groundCheckSphereComponent.groundDistance = groundCheckData.groundDistance;
+            groundCheckSphereComponent.groundMask = groundCheckData.groundMask;
 
-            jumpComponent.jumpCooldown = playerData.jumpCooldown;
-            jumpComponent.jumpForce = playerData.jumpForce;
+            jumpComponent.jumpCooldown = jumpData.jumpCooldown;
+            jumpComponent.jumpForce = jumpData.jumpForce;
         }
     }
 }

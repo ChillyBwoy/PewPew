@@ -41,7 +41,7 @@ namespace PewPew
                 .Add(new PlayerGroundCheckSystem())
                 .Add(new PlayerJumpSendEventSystem())
                 .Add(new PlayerJumpSystem())
-                .Add(new PlayerMovementSystem())
+                .Add(new MovementSystem())
                 .Inject(sceneData)
                 .Init();
 

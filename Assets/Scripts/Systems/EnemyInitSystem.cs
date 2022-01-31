@@ -11,11 +11,14 @@ namespace PewPew.Systems
         private readonly SceneData sceneData;
         public void Init()
         {
-            EcsEntity enemy = world.NewEntity();
+            EcsEntity entity = world.NewEntity();
 
-            ref var enemyComponent = ref enemy.Get<EnemyComponent>();
-            ref var modelComponent = ref enemy.Get<ModelComponent>();
-            ref var directionCompontn = ref enemy.Get<DirectionComponent>();
+            ref var enemyComponent = ref entity.Get<EnemyComponent>();
+            ref var modelComponent = ref entity.Get<ModelComponent>();
+            ref var movableComponent = ref entity.Get<MovableComponent>();
+            ref var directionComponent = ref entity.Get<DirectionComponent>();
+            ref var groundCheckSphereComponent = ref entity.Get<GroundCheckSphereComponent>();
+            ref var jumpComponent = ref entity.Get<JumpComponent>();
 
             GameObject go = Object.Instantiate(
                 sceneData.enemyPrefab,
@@ -23,11 +26,24 @@ namespace PewPew.Systems
                 Quaternion.identity
             );
 
-            EnemyData enemyData = go.GetComponent<EnemyData>();
+            MovableData movableData = go.GetComponent<MovableData>();
+            GroundCheckData groundCheckData = go.GetComponent<GroundCheckData>();
+            JumpData jumpData = go.GetComponent<JumpData>();
+
+            movableComponent.characterController = movableData.characterController;
+            movableComponent.speed = movableData.speed;
+            movableComponent.gravity = movableData.gravity;
 
             modelComponent.modelTransform = go.transform;
 
-            directionCompontn.direction = Vector3.forward;
+            directionComponent.direction = Vector3.forward;
+
+            groundCheckSphereComponent.groundCheckSphere = groundCheckData.groundCheckSphere;
+            groundCheckSphereComponent.groundDistance = groundCheckData.groundDistance;
+            groundCheckSphereComponent.groundMask = groundCheckData.groundMask;
+
+            jumpComponent.jumpCooldown = jumpData.jumpCooldown;
+            jumpComponent.jumpForce = jumpData.jumpForce;
         }
     }
 }
