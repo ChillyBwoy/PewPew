@@ -47,6 +47,7 @@ namespace PewPew.Systems
             cameraComponent.cameraFocusRadius = playerData.cameraFocusRadius;
             cameraComponent.cameraTransform = playerData.cameraTransform != null ? playerData.cameraTransform : sceneData.mainCamera.transform;
             cameraComponent.cameraVerticalOffset = playerData.cameraVerticalOffset;
+            cameraComponent.cameraState = CameraComponent.CameraState.FirstPerson;
 
             groundCheckSphereComponent.groundCheckSphere = playerData.groundCheckSphere;
             groundCheckSphereComponent.groundDistance = playerData.groundDistance;

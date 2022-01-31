@@ -6,11 +6,12 @@ namespace PewPew.Systems
 {
     sealed class PlayerJumpSendEventSystem : IEcsRunSystem
     {
-
         private readonly EcsFilter<PlayerComponent, JumpComponent> playerFilter = null;
+
         public void Run()
         {
-            if (!Input.GetKeyDown(KeyCode.Space)) return;
+            if (!Input.GetKeyDown(KeyCode.Space))
+                return;
 
             foreach (var i in playerFilter)
             {

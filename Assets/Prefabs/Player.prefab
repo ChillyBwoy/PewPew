@@ -356,8 +356,8 @@ MonoBehaviour:
   speed: 5
   gravity: -25
   cameraTransform: {fileID: 0}
-  cameraDistance: 3
-  cameraVerticalOffset: 3
+  cameraDistance: 4
+  cameraVerticalOffset: 4
   cameraFocusRadius: 0.5
   mouseSensitivity: 2
   groundMask:

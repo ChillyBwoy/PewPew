@@ -10,12 +10,10 @@ namespace PewPew.Systems
     {
         private readonly EcsFilter<PlayerComponent, DirectionComponent> directionFilter = null;
 
-        private float moveX;
-        private float moveZ;
-
         public void Run()
         {
-            SetDirection();
+            float moveX = Input.GetAxis("Horizontal");
+            float moveZ = Input.GetAxis("Vertical");
 
             foreach (var i in directionFilter)
             {
@@ -25,12 +23,6 @@ namespace PewPew.Systems
                 direction.x = moveX;
                 direction.z = moveZ;
             }
-        }
-
-        private void SetDirection()
-        {
-            moveX = Input.GetAxis("Horizontal");
-            moveZ = Input.GetAxis("Vertical");
         }
     }
 }
