@@ -11,8 +11,8 @@ namespace PewPew.Systems
         {
             foreach (var i in blockFilter)
             {
-                ref var entity = ref blockFilter.GetEntity(i);
-                ref var block = ref blockFilter.Get1(i);
+                ref EcsEntity entity = ref blockFilter.GetEntity(i);
+                ref BlockJumpDurationComponent block = ref blockFilter.Get1(i);
 
                 block.timer -= Time.deltaTime;
                 if (block.timer <= 0)

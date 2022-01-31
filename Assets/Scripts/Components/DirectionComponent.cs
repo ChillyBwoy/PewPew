@@ -7,4 +7,3 @@ namespace PewPew.Components
         public Vector3 direction;
     }
 }
-

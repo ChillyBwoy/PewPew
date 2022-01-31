@@ -27,26 +27,24 @@ namespace PewPew
 
             updateSystems
                 .OneFrame<JumpEvent>()
-                .OneFrame<PlayerInput>()
                 .OneFrame<CameraChangeStateEvent>()
                 .Add(new PlayerInitSystem())
                 .Add(new PlayerInputSystem())
                 .Add(new CameraChangeStateSystem())
-                .Add(new DebugSystem())
                 .Add(new JumpBlockSystem())
                 .Add(new CursorLockSystem())
                 .Add(new PlayerMovableInputSystem())
                 .Add(new PlayerMouseInputSystem())
                 .Add(new PlayerMouseLookSystem())
-                .Add(new PlayerGroundCheckSystem())
+                .Add(new GroundCheckSystem())
                 .Add(new PlayerJumpSendEventSystem())
-                .Add(new PlayerJumpSystem())
+                .Add(new JumpSystem())
                 .Add(new MovementSystem())
                 .Inject(sceneData)
                 .Init();
 
             lateUpdateSystems
-                .Add(new PlayerCameraSystem())
+                .Add(new CameraMoveSystem())
                 .Add(new EnemyInitSystem())
                 .Add(new EnemyMovementSystem())
                 .Inject(sceneData)

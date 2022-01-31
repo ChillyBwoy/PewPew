@@ -1,5 +1,3 @@
-using System;
-
 namespace PewPew.Components
 {
     public struct JumpComponent

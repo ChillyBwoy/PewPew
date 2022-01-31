@@ -4,9 +4,9 @@ using PewPew.Components;
 
 namespace PewPew.Systems
 {
-    sealed class PlayerCameraSystem : IEcsRunSystem, IEcsInitSystem
+    sealed class CameraMoveSystem : IEcsRunSystem, IEcsInitSystem
     {
-        private readonly EcsFilter<PlayerComponent, CameraComponent, ModelComponent> filter = null;
+        private readonly EcsFilter<PlayerComponent, ModelComponent, CameraComponent> filter = null;
 
         private Vector3 focusPoint;
 
@@ -19,8 +19,8 @@ namespace PewPew.Systems
         {
             foreach (var i in filter)
             {
-                ref var playerComponent = ref filter.Get1(i);
-                ref var cameraComponent = ref filter.Get2(i);
+                ref PlayerComponent playerComponent = ref filter.Get1(i);
+                ref CameraComponent cameraComponent = ref filter.Get3(i);
 
                 focusPoint = WithVerticalOffset(playerComponent.lookAt.transform.position, cameraComponent.cameraVerticalOffset);
             }
@@ -30,9 +30,9 @@ namespace PewPew.Systems
         {
             foreach (var i in filter)
             {
-                ref var playerComponent = ref filter.Get1(i);
-                ref var cameraComponent = ref filter.Get2(i);
-                ref var modelComponent = ref filter.Get3(i);
+                ref PlayerComponent playerComponent = ref filter.Get1(i);
+                ref ModelComponent modelComponent = ref filter.Get2(i);
+                ref CameraComponent cameraComponent = ref filter.Get3(i);
 
                 switch (cameraComponent.cameraState)
                 {

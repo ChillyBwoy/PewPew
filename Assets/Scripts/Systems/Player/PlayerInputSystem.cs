@@ -6,7 +6,6 @@ namespace PewPew.Systems
 {
     sealed class PlayerInputSystem : IEcsRunSystem
     {
-        private readonly EcsWorld world = null;
         private readonly EcsFilter<CameraComponent> cameraFilter = null;
 
         public void Run()

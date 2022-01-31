@@ -4,14 +4,15 @@ using PewPew.Components;
 
 namespace PewPew.Systems
 {
-    sealed class PlayerGroundCheckSystem : IEcsRunSystem
+    sealed class GroundCheckSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerComponent, GroundCheckSphereComponent> groundFilter = null;
+        private readonly EcsFilter<GroundCheckSphereComponent> groundFilter = null;
         public void Run()
         {
             foreach (var i in groundFilter)
             {
-                ref var groundCheck = ref groundFilter.Get2(i);
+                ref GroundCheckSphereComponent groundCheck = ref groundFilter.Get1(i);
+
                 groundCheck.isGrounded = Physics.CheckSphere(
                     groundCheck.groundCheckSphere.position,
                     groundCheck.groundDistance,

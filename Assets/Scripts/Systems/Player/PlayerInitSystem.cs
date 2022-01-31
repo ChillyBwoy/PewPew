@@ -44,12 +44,12 @@ namespace PewPew.Systems
 
             directionComponent.direction = Vector3.forward;
 
-            mouseLookDirectionComponent.mouseSensitivity = playerData.mouseSensitivity;
+            mouseLookDirectionComponent.mouseSensitivity = sceneData.mouseSensitivity;
 
-            cameraComponent.cameraDistance = playerData.cameraDistance;
-            cameraComponent.cameraFocusRadius = playerData.cameraFocusRadius;
-            cameraComponent.cameraTransform = playerData.cameraTransform != null ? playerData.cameraTransform : sceneData.mainCamera.transform;
-            cameraComponent.cameraVerticalOffset = playerData.cameraVerticalOffset;
+            cameraComponent.cameraTransform = sceneData.mainCamera.transform;
+            cameraComponent.cameraDistance = sceneData.cameraDistance;
+            cameraComponent.cameraFocusRadius = sceneData.cameraFocusRadius;
+            cameraComponent.cameraVerticalOffset = sceneData.cameraVerticalOffset;
             cameraComponent.cameraState = CameraComponent.CameraState.FirstPerson;
 
             groundCheckSphereComponent.groundCheckSphere = groundCheckData.groundCheckSphere;

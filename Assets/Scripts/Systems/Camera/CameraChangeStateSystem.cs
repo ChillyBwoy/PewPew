@@ -11,7 +11,7 @@ namespace PewPew.Systems
         {
             foreach (var i in cameraFilter)
             {
-                ref var cameraComponent = ref cameraFilter.Get1(i);
+                ref CameraComponent cameraComponent = ref cameraFilter.Get1(i);
 
                 switch (cameraComponent.cameraState)
                 {

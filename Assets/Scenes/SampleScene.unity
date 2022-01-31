@@ -628,7 +628,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 768626578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.93, y: 1, z: 18.64}
+  m_LocalPosition: {x: -10, y: 1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2832,6 +2832,10 @@ MonoBehaviour:
   enemyPrefab: {fileID: 6232431573307323717, guid: 5b9be5328a17d4c8ea1617f458421130, type: 3}
   enemySpawnPoint: {fileID: 768626579}
   mainCamera: {fileID: 963194227}
+  cameraDistance: 4
+  cameraVerticalOffset: 4
+  cameraFocusRadius: 0.5
+  mouseSensitivity: 2
 --- !u!43 &1260013655
 Mesh:
   m_ObjectHideFlags: 0

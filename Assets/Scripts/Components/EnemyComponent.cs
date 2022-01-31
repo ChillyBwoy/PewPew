@@ -1,6 +1,8 @@
+using Leopotam.Ecs;
+
 namespace PewPew.Components
 {
-    public struct EnemyComponent
+    public struct EnemyComponent : IEcsIgnoreInFilter
     {
 
     }
