@@ -1,4 +1,3 @@
-using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
 using PewPew.Data;
@@ -15,16 +14,14 @@ namespace PewPew.Systems
         {
             EcsEntity entity = world.NewEntity();
 
-            ref var cameraComponent = ref entity.Get<CameraComponent>();
-            ref var lookDirectionComponent = ref entity.Get<LookDirectionComponent>();
+            ref var camera = ref entity.Get<CameraComponent>();
+            ref var inputAxis = ref entity.Get<InputAxisComponent>();
 
-            lookDirectionComponent.sensitivity = sceneData.lookSensitivity;
-
-            cameraComponent.cameraTransform = sceneData.mainCamera.transform;
-            cameraComponent.cameraDistance = sceneData.cameraDistance;
-            cameraComponent.cameraFocusRadius = sceneData.cameraFocusRadius;
-            cameraComponent.cameraVerticalOffset = sceneData.cameraVerticalOffset;
-            cameraComponent.cameraMode = CameraMode.FirstPerson;
+            camera.cameraTransform = sceneData.mainCamera.transform;
+            camera.cameraDistance = sceneData.cameraDistance;
+            camera.cameraFocusRadius = sceneData.cameraFocusRadius;
+            camera.cameraVerticalOffset = sceneData.cameraVerticalOffset;
+            camera.cameraMode = sceneData.cameraMode;
         }
     }
 }

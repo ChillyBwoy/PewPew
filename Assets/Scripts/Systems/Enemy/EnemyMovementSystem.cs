@@ -8,7 +8,7 @@ namespace PewPew.Systems
     sealed class EnemyMovementSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsFilter<PlayerComponent, ModelComponent> playerFilter = null;
-        private readonly EcsFilter<EnemyComponent, ModelComponent, MovableComponent, DirectionComponent> enemyFilter = null;
+        private readonly EcsFilter<EnemyComponent, ModelComponent, MovableComponent> enemyFilter = null;
 
         private EcsEntity playerEntity;
 
@@ -19,13 +19,13 @@ namespace PewPew.Systems
 
         public void Run()
         {
-            ref var playerModelComponent = ref playerEntity.Get<ModelComponent>();
+            ref var playerModel = ref playerEntity.Get<ModelComponent>();
 
             foreach (var i in enemyFilter)
             {
-                ref DirectionComponent directionComponent = ref enemyFilter.Get4(i);
+                ref MovableComponent movable = ref enemyFilter.Get3(i);
 
-                directionComponent.direction = playerModelComponent.modelTransform.transform.position;
+                movable.direction = playerModel.modelTransform.transform.position.normalized;
 
                 // ref ModelComponent modelComponent = ref enemyFilter.Get2(i);
 

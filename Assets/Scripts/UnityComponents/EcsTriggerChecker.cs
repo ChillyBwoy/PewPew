@@ -10,11 +10,6 @@ namespace PewPew.UnityComponents
             if (!other.CompareTag(targetTag)) return;
 
             Debug.Log("Player enters the collider");
-
-            // WorldHandler.GetWorld().SendMessage(new DebugMessageRequestComponent()
-            // {
-            //     message = "Player is here"
-            // });
         }
     }
 }

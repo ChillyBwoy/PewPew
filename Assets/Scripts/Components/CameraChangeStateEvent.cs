@@ -1,9 +1,10 @@
 using Leopotam.Ecs;
+using PewPew.Data;
 
 namespace PewPew.Components
 {
-    public struct CameraChangeStateEvent : IEcsIgnoreInFilter
+    public struct CameraChangeStateEvent
     {
-
+        public CameraMode cameraMode;
     }
 }

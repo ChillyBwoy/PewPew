@@ -13,12 +13,11 @@ namespace PewPew.Systems
         {
             EcsEntity entity = world.NewEntity();
 
-            ref var enemyComponent = ref entity.Get<EnemyComponent>();
-            ref var modelComponent = ref entity.Get<ModelComponent>();
-            ref var movableComponent = ref entity.Get<MovableComponent>();
-            ref var directionComponent = ref entity.Get<DirectionComponent>();
-            ref var groundCheckSphereComponent = ref entity.Get<GroundCheckSphereComponent>();
-            ref var jumpComponent = ref entity.Get<JumpComponent>();
+            ref EnemyComponent enemy = ref entity.Get<EnemyComponent>();
+            ref ModelComponent model = ref entity.Get<ModelComponent>();
+            ref MovableComponent movable = ref entity.Get<MovableComponent>();
+            ref GroundCheckSphereComponent groundCheckSphere = ref entity.Get<GroundCheckSphereComponent>();
+            ref JumpComponent jump = ref entity.Get<JumpComponent>();
 
             GameObject go = Object.Instantiate(
                 sceneData.enemyPrefab,
@@ -30,20 +29,19 @@ namespace PewPew.Systems
             GroundCheckData groundCheckData = go.GetComponent<GroundCheckData>();
             JumpData jumpData = go.GetComponent<JumpData>();
 
-            movableComponent.characterController = movableData.characterController;
-            movableComponent.speed = movableData.speed;
-            movableComponent.gravity = movableData.gravity;
+            model.modelTransform = go.transform;
 
-            modelComponent.modelTransform = go.transform;
+            movable.characterController = movableData.characterController;
+            movable.speed = movableData.speed;
+            movable.gravity = movableData.gravity;
+            movable.direction = Vector3.forward;
 
-            directionComponent.direction = Vector3.forward;
+            groundCheckSphere.groundCheckSphere = groundCheckData.groundCheckSphere;
+            groundCheckSphere.groundDistance = groundCheckData.groundDistance;
+            groundCheckSphere.groundMask = groundCheckData.groundMask;
 
-            groundCheckSphereComponent.groundCheckSphere = groundCheckData.groundCheckSphere;
-            groundCheckSphereComponent.groundDistance = groundCheckData.groundDistance;
-            groundCheckSphereComponent.groundMask = groundCheckData.groundMask;
-
-            jumpComponent.jumpCooldown = jumpData.jumpCooldown;
-            jumpComponent.jumpForce = jumpData.jumpForce;
+            jump.jumpCooldown = jumpData.jumpCooldown;
+            jump.jumpForce = jumpData.jumpForce;
         }
     }
 }

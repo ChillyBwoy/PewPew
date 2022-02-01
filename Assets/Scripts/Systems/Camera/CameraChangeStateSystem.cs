@@ -12,18 +12,10 @@ namespace PewPew.Systems
         {
             foreach (var i in cameraFilter)
             {
-                ref CameraComponent cameraComponent = ref cameraFilter.Get1(i);
+                ref CameraComponent camera = ref cameraFilter.Get1(i);
+                ref CameraChangeStateEvent cameraChangeState = ref cameraFilter.Get2(i);
 
-                switch (cameraComponent.cameraMode)
-                {
-                    case CameraMode.FirstPerson:
-                        cameraComponent.cameraMode = CameraMode.ThirdPerson;
-                        break;
-
-                    case CameraMode.ThirdPerson:
-                        cameraComponent.cameraMode = CameraMode.FirstPerson;
-                        break;
-                }
+                camera.cameraMode = cameraChangeState.cameraMode;
             }
         }
     }

@@ -10,5 +10,6 @@ namespace PewPew.Components
         public float cameraVerticalOffset;
         public float cameraFocusRadius;
         public CameraMode cameraMode;
+        public Transform cameraTarget;
     }
 }

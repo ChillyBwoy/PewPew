@@ -10,6 +10,7 @@ namespace PewPew
     sealed class EcsStartup : MonoBehaviour
     {
         private EcsWorld world = null;
+        private EcsSystems initSystems = null;
         private EcsSystems updateSystems = null;
         private EcsSystems lateUpdateSystems = null;
         public SceneData sceneData;
@@ -17,6 +18,7 @@ namespace PewPew
         void Start()
         {
             world = new EcsWorld();
+            initSystems = new EcsSystems(world);
             updateSystems = new EcsSystems(world);
             lateUpdateSystems = new EcsSystems(world);
 
@@ -25,16 +27,19 @@ namespace PewPew
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(updateSystems);
 #endif
 
+            initSystems
+                .Add(new CursorLockSystem())
+                .Init();
+
             updateSystems
                 .OneFrame<JumpEvent>()
                 .OneFrame<CameraChangeStateEvent>()
                 .Add(new PlayerInitSystem())
-                .Add(new PlayerInputSystem())
+                .Add(new InputKeysSystem())
                 .Add(new CameraChangeStateSystem())
                 .Add(new JumpBlockSystem())
-                .Add(new CursorLockSystem())
                 .Add(new PlayerMovableInputSystem())
-                .Add(new LookInputSystem())
+                .Add(new InputAxisSystem())
                 .Add(new PlayerMouseLookSystem())
                 .Add(new GroundCheckSystem())
                 .Add(new PlayerJumpSendEventSystem())
@@ -44,6 +49,7 @@ namespace PewPew
                 .Init();
 
             lateUpdateSystems
+                .Add(new CameraInitSystem())
                 .Add(new CameraMoveSystem())
                 .Add(new EnemyInitSystem())
                 .Add(new EnemyMovementSystem())
@@ -63,6 +69,9 @@ namespace PewPew
 
         void OnDestroy()
         {
+            initSystems?.Destroy();
+            initSystems = null;
+
             updateSystems?.Destroy();
             updateSystems = null;
 

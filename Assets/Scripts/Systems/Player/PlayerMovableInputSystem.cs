@@ -8,7 +8,7 @@ namespace PewPew.Systems
 
     sealed class PlayerMovableInputSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerComponent, DirectionComponent> directionFilter = null;
+        private readonly EcsFilter<PlayerComponent, MovableComponent> directionFilter = null;
 
         public void Run()
         {
@@ -17,8 +17,8 @@ namespace PewPew.Systems
 
             foreach (var i in directionFilter)
             {
-                ref var directionComponent = ref directionFilter.Get2(i);
-                ref var direction = ref directionComponent.direction;
+                ref MovableComponent movable = ref directionFilter.Get2(i);
+                ref var direction = ref movable.direction;
 
                 direction.x = moveX;
                 direction.z = moveZ;

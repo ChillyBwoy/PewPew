@@ -15,14 +15,12 @@ namespace PewPew.Systems
         {
             EcsEntity entity = world.NewEntity();
 
-            ref var playerComponent = ref entity.Get<PlayerComponent>();
-            ref var movableComponent = ref entity.Get<MovableComponent>();
-            ref var modelComponent = ref entity.Get<ModelComponent>();
-            ref var directionComponent = ref entity.Get<DirectionComponent>();
-            ref var cameraComponent = ref entity.Get<CameraComponent>();
-            ref var lookDirectionComponent = ref entity.Get<LookDirectionComponent>();
-            ref var groundCheckSphereComponent = ref entity.Get<GroundCheckSphereComponent>();
-            ref var jumpComponent = ref entity.Get<JumpComponent>();
+            ref var player = ref entity.Get<PlayerComponent>();
+            ref var movable = ref entity.Get<MovableComponent>();
+            ref var model = ref entity.Get<ModelComponent>();
+            ref var inputAxis = ref entity.Get<InputAxisComponent>();
+            ref var groundCheckSphere = ref entity.Get<GroundCheckSphereComponent>();
+            ref var jump = ref entity.Get<JumpComponent>();
 
             GameObject go = Object.Instantiate(
                 sceneData.playerPrefab,
@@ -34,28 +32,20 @@ namespace PewPew.Systems
             GroundCheckData groundCheckData = go.GetComponent<GroundCheckData>();
             JumpData jumpData = go.GetComponent<JumpData>();
 
-            movableComponent.characterController = movableData.characterController;
-            movableComponent.speed = movableData.speed;
-            movableComponent.gravity = movableData.gravity;
+            movable.characterController = movableData.characterController;
+            movable.speed = movableData.speed;
+            movable.gravity = movableData.gravity;
+            movable.direction = Vector3.forward;
 
-            modelComponent.modelTransform = go.transform;
+            model.modelTransform = go.transform;
 
-            directionComponent.direction = Vector3.forward;
 
-            lookDirectionComponent.sensitivity = sceneData.lookSensitivity;
+            groundCheckSphere.groundCheckSphere = groundCheckData.groundCheckSphere;
+            groundCheckSphere.groundDistance = groundCheckData.groundDistance;
+            groundCheckSphere.groundMask = groundCheckData.groundMask;
 
-            cameraComponent.cameraTransform = sceneData.mainCamera.transform;
-            cameraComponent.cameraDistance = sceneData.cameraDistance;
-            cameraComponent.cameraFocusRadius = sceneData.cameraFocusRadius;
-            cameraComponent.cameraVerticalOffset = sceneData.cameraVerticalOffset;
-            cameraComponent.cameraMode = sceneData.cameraMode;
-
-            groundCheckSphereComponent.groundCheckSphere = groundCheckData.groundCheckSphere;
-            groundCheckSphereComponent.groundDistance = groundCheckData.groundDistance;
-            groundCheckSphereComponent.groundMask = groundCheckData.groundMask;
-
-            jumpComponent.jumpCooldown = jumpData.jumpCooldown;
-            jumpComponent.jumpForce = jumpData.jumpForce;
+            jump.jumpCooldown = jumpData.jumpCooldown;
+            jump.jumpForce = jumpData.jumpForce;
         }
     }
 }
