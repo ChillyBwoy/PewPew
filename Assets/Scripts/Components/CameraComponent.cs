@@ -1,4 +1,5 @@
 using UnityEngine;
+using PewPew.Data;
 
 namespace PewPew.Components
 {
@@ -8,12 +9,6 @@ namespace PewPew.Components
         public float cameraDistance;
         public float cameraVerticalOffset;
         public float cameraFocusRadius;
-        public CameraState cameraState;
-
-        public enum CameraState
-        {
-            FirstPerson = 0,
-            ThirdPerson = 1,
-        }
+        public CameraMode cameraMode;
     }
 }

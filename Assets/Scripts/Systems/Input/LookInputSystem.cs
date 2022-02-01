@@ -5,9 +5,9 @@ using PewPew.Components;
 
 namespace PewPew.Systems
 {
-    sealed class PlayerMouseInputSystem : IEcsRunSystem
+    sealed class LookInputSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<MouseLookDirectionComponent> filter = null;
+        private readonly EcsFilter<LookDirectionComponent> filter = null;
 
         private float axisX;
         private float axisY;

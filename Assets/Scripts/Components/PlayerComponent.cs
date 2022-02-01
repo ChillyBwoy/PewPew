@@ -1,9 +1,8 @@
-using UnityEngine;
+using Leopotam.Ecs;
 
 namespace PewPew.Components
 {
-    public struct PlayerComponent
+    public struct PlayerComponent : IEcsIgnoreInFilter
     {
-        public Transform lookAt;
     }
 }

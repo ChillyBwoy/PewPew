@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace PewPew.Components
 {
-    public struct MouseLookDirectionComponent
+    public struct LookDirectionComponent
     {
         public Vector2 direction;
-        public float mouseSensitivity;
+        public float sensitivity;
     }
 }

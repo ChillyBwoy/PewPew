@@ -1,4 +1,5 @@
 using UnityEngine;
+using PewPew.Data;
 
 namespace PewPew.UnityComponents
 {
@@ -17,8 +18,9 @@ namespace PewPew.UnityComponents
         [Range(1f, 5f)] public float cameraDistance = 2f;
         [Range(0f, 5f)] public float cameraVerticalOffset = 2f;
         [Range(0f, 3f)] public float cameraFocusRadius = 1f;
+        public CameraMode cameraMode = CameraMode.FirstPerson;
 
         [Header("Input")]
-        [Range(0.1f, 2f)] public float mouseSensitivity = 1.5f;
+        [Range(0.1f, 2f)] public float lookSensitivity = 2f;
     }
 }

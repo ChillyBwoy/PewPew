@@ -1,49 +1,37 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
+using PewPew.Data;
 
 namespace PewPew.Systems
 {
-    sealed class CameraMoveSystem : IEcsRunSystem, IEcsInitSystem
+    sealed class CameraMoveSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PlayerComponent, ModelComponent, CameraComponent> filter = null;
-
-        private Vector3 focusPoint;
 
         private Vector3 WithVerticalOffset(Vector3 pos, float offset)
         {
             return new Vector3(pos.x, pos.y + offset, pos.z);
         }
 
-        public void Init()
-        {
-            foreach (var i in filter)
-            {
-                ref PlayerComponent playerComponent = ref filter.Get1(i);
-                ref CameraComponent cameraComponent = ref filter.Get3(i);
-
-                focusPoint = WithVerticalOffset(playerComponent.lookAt.transform.position, cameraComponent.cameraVerticalOffset);
-            }
-        }
-
         public void Run()
         {
             foreach (var i in filter)
             {
-                ref PlayerComponent playerComponent = ref filter.Get1(i);
                 ref ModelComponent modelComponent = ref filter.Get2(i);
                 ref CameraComponent cameraComponent = ref filter.Get3(i);
 
-                switch (cameraComponent.cameraState)
+                switch (cameraComponent.cameraMode)
                 {
-                    case CameraComponent.CameraState.FirstPerson:
+                    case CameraMode.FirstPerson:
                         cameraComponent.cameraTransform.localPosition = modelComponent.modelTransform.position;
                         break;
 
-                    case CameraComponent.CameraState.ThirdPerson:
-                        var target = playerComponent.lookAt.transform;
-                        var focusRadius = cameraComponent.cameraFocusRadius;
-                        var verticalOffset = cameraComponent.cameraVerticalOffset;
+                    case CameraMode.ThirdPerson:
+                        Transform target = modelComponent.modelTransform.transform;
+                        float focusRadius = cameraComponent.cameraFocusRadius;
+                        float verticalOffset = cameraComponent.cameraVerticalOffset;
+                        Vector3 focusPoint = WithVerticalOffset(modelComponent.modelTransform.position, cameraComponent.cameraVerticalOffset);
 
                         if (focusRadius > 0f)
                         {

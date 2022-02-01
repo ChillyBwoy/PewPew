@@ -2835,7 +2835,8 @@ MonoBehaviour:
   cameraDistance: 4
   cameraVerticalOffset: 4
   cameraFocusRadius: 0.5
-  mouseSensitivity: 2
+  cameraMode: 0
+  lookSensitivity: 2
 --- !u!43 &1260013655
 Mesh:
   m_ObjectHideFlags: 0

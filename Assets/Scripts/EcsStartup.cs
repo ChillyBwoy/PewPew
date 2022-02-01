@@ -34,7 +34,7 @@ namespace PewPew
                 .Add(new JumpBlockSystem())
                 .Add(new CursorLockSystem())
                 .Add(new PlayerMovableInputSystem())
-                .Add(new PlayerMouseInputSystem())
+                .Add(new LookInputSystem())
                 .Add(new PlayerMouseLookSystem())
                 .Add(new GroundCheckSystem())
                 .Add(new PlayerJumpSendEventSystem())

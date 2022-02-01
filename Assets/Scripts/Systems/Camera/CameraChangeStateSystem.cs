@@ -1,6 +1,7 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
+using PewPew.Data;
 
 namespace PewPew.Systems
 {
@@ -13,14 +14,14 @@ namespace PewPew.Systems
             {
                 ref CameraComponent cameraComponent = ref cameraFilter.Get1(i);
 
-                switch (cameraComponent.cameraState)
+                switch (cameraComponent.cameraMode)
                 {
-                    case CameraComponent.CameraState.FirstPerson:
-                        cameraComponent.cameraState = CameraComponent.CameraState.ThirdPerson;
+                    case CameraMode.FirstPerson:
+                        cameraComponent.cameraMode = CameraMode.ThirdPerson;
                         break;
 
-                    case CameraComponent.CameraState.ThirdPerson:
-                        cameraComponent.cameraState = CameraComponent.CameraState.FirstPerson;
+                    case CameraMode.ThirdPerson:
+                        cameraComponent.cameraMode = CameraMode.FirstPerson;
                         break;
                 }
             }

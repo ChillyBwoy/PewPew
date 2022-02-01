@@ -8,7 +8,7 @@ namespace PewPew.Systems
     sealed class PlayerMouseLookSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsFilter<PlayerComponent, ModelComponent> playerFilter = null;
-        private readonly EcsFilter<PlayerComponent, ModelComponent, MouseLookDirectionComponent, CameraComponent> mouseLookFilter = null;
+        private readonly EcsFilter<PlayerComponent, ModelComponent, LookDirectionComponent, CameraComponent> mouseLookFilter = null;
         private Quaternion startTransformRotation;
 
         public void Init()
@@ -27,14 +27,14 @@ namespace PewPew.Systems
             foreach (var i in mouseLookFilter)
             {
                 ref ModelComponent modelComponent = ref mouseLookFilter.Get2(i);
-                ref MouseLookDirectionComponent lookComponent = ref mouseLookFilter.Get3(i);
+                ref LookDirectionComponent lookComponent = ref mouseLookFilter.Get3(i);
                 ref CameraComponent cameraComponent = ref mouseLookFilter.Get4(i);
 
                 float axisX = lookComponent.direction.x;
                 float axisY = lookComponent.direction.y;
 
-                Quaternion rotateX = Quaternion.AngleAxis(axisX, Vector3.up * Time.deltaTime * lookComponent.mouseSensitivity);
-                Quaternion rotateY = Quaternion.AngleAxis(axisY, Vector3.right * Time.deltaTime * lookComponent.mouseSensitivity);
+                Quaternion rotateX = Quaternion.AngleAxis(axisX, Vector3.up * Time.deltaTime * lookComponent.sensitivity);
+                Quaternion rotateY = Quaternion.AngleAxis(axisY, Vector3.right * Time.deltaTime * lookComponent.sensitivity);
 
                 modelComponent.modelTransform.rotation = startTransformRotation * rotateX;
                 cameraComponent.cameraTransform.rotation = modelComponent.modelTransform.rotation * rotateY;
