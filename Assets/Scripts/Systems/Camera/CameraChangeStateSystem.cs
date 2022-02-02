@@ -15,7 +15,7 @@ namespace PewPew.Systems
                 ref CameraComponent camera = ref cameraFilter.Get1(i);
                 ref CameraChangeStateEvent cameraChangeState = ref cameraFilter.Get2(i);
 
-                camera.cameraMode = cameraChangeState.cameraMode;
+                camera.mode = cameraChangeState.cameraMode;
             }
         }
     }

@@ -26,7 +26,7 @@ namespace PewPew.Systems
                 ref InputAxisComponent axis = ref filter.Get1(i);
 
                 axis.axis.x = axisX;
-                axis.axis.y = axisY;
+                axis.axis.y = Mathf.Clamp(axisY, -45, 45);
             }
         }
     }

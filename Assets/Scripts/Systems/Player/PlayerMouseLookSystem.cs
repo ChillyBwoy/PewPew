@@ -5,7 +5,6 @@ using PewPew.UnityComponents;
 
 namespace PewPew.Systems
 {
-
     sealed class PlayerMouseLookSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly SceneData sceneData = null;
@@ -30,16 +29,12 @@ namespace PewPew.Systems
             {
                 ref ModelComponent model = ref mouseLookFilter.Get2(i);
                 ref InputAxisComponent inputAxis = ref mouseLookFilter.Get3(i);
-                // ref CameraComponent cameraComponent = ref mouseLookFilter.Get4(i);
 
                 float axisX = inputAxis.axis.x;
                 float axisY = inputAxis.axis.y;
 
                 Quaternion rotateX = Quaternion.AngleAxis(axisX, Vector3.up * Time.deltaTime * sceneData.lookSensitivity);
-                // Quaternion rotateY = Quaternion.AngleAxis(axisY, Vector3.right * Time.deltaTime * sceneData.lookSensitivity);
-
                 model.modelTransform.rotation = startTransformRotation * rotateX;
-                // cameraComponent.cameraTransform.rotation = modelComponent.modelTransform.rotation * rotateY;
             }
         }
     }

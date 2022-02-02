@@ -6,47 +6,37 @@ using PewPew.Data;
 namespace PewPew.Systems
 {
     // TODO: придумать как избавиться от хардкода
-    sealed class InputKeysSystem : IEcsInitSystem, IEcsRunSystem
+    sealed class InputKeysSystem : IEcsRunSystem
     {
         private readonly EcsFilter<CameraComponent> cameraFilter = null;
-        private readonly EcsFilter<PlayerComponent, ModelComponent> playerFilter = null;
-        private Transform cameraTarget;
-
-        public void Init()
-        {
-            foreach (var i in playerFilter)
-            {
-                ref ModelComponent model = ref playerFilter.Get2(i);
-                cameraTarget = model.modelTransform;
-            }
-        }
 
         public void Run()
         {
+            if (!Input.GetKeyDown(KeyCode.Tab))
+                return;
+
             foreach (var i in cameraFilter)
             {
                 ref EcsEntity cameraEntity = ref cameraFilter.GetEntity(i);
                 ref CameraComponent camera = ref cameraFilter.Get1(i);
 
-                if (Input.GetKeyDown(KeyCode.Alpha1))
+                switch (camera.mode)
                 {
-                    cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.None;
-                    camera.cameraTarget = null;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.FirstPerson;
-                    camera.cameraTarget = cameraTarget;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha3))
-                {
-                    cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.ThirdPerson;
-                    camera.cameraTarget = cameraTarget;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha4))
-                {
-                    cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.FlyMode;
-                    camera.cameraTarget = null;
+                    case CameraMode.FirstPerson:
+                        cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.ThirdPerson;
+                        break;
+
+                    case CameraMode.ThirdPerson:
+                        cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.FlyMode;
+                        break;
+
+                    case CameraMode.FlyMode:
+                        cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.Arena;
+                        break;
+
+                    case CameraMode.Arena:
+                        cameraEntity.Get<CameraChangeStateEvent>().cameraMode = CameraMode.FirstPerson;
+                        break;
                 }
             }
         }

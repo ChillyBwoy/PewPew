@@ -5,11 +5,11 @@ namespace PewPew.Components
 {
     public struct CameraComponent
     {
-        public Transform cameraTransform;
-        public float cameraDistance;
-        public float cameraVerticalOffset;
+        public Transform transform;
+        public float distance;
+        public float verticalOffset;
         public float cameraFocusRadius;
-        public CameraMode cameraMode;
-        public Transform cameraTarget;
+        public CameraMode mode;
+        public Transform lookTarget;
     }
 }
