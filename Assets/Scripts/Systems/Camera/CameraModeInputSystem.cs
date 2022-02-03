@@ -1,12 +1,11 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
-using PewPew.Data;
 
 namespace PewPew.Systems
 {
     // TODO: придумать как избавиться от хардкода
-    sealed class InputKeysSystem : IEcsRunSystem
+    sealed class CameraModeInputSystem : IEcsRunSystem
     {
         private readonly EcsFilter<CameraComponent> cameraFilter = null;
 

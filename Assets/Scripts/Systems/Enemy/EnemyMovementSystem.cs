@@ -1,7 +1,7 @@
 using UnityEngine;
 using Leopotam.Ecs;
-
 using PewPew.Components;
+using PewPew.UnityComponents;
 
 namespace PewPew.Systems
 {
@@ -9,7 +9,7 @@ namespace PewPew.Systems
     {
         private readonly EcsFilter<PlayerComponent, ModelComponent> playerFilter = null;
         private readonly EcsFilter<EnemyComponent, ModelComponent, MovableComponent> enemyFilter = null;
-
+        private readonly SceneData sceneData = null;
         private EcsEntity playerEntity;
 
         public void Init()
@@ -23,25 +23,21 @@ namespace PewPew.Systems
 
             foreach (var i in enemyFilter)
             {
+                ref ModelComponent model = ref enemyFilter.Get2(i);
                 ref MovableComponent movable = ref enemyFilter.Get3(i);
 
-                movable.direction = playerModel.modelTransform.transform.position.normalized;
+                Vector3 targetPos = playerModel.modelTransform.transform.position;
+                model.modelTransform.LookAt(targetPos);
 
-                // ref ModelComponent modelComponent = ref enemyFilter.Get2(i);
-
-                // Vector3 target = playerModelComponent.modelTransform.transform.position - modelComponent.modelTransform.transform.position;
-                // Quaternion rotation = Quaternion.LookRotation(-target, Vector3.up);
-
-                // modelComponent.modelTransform.rotation = Quaternion.Slerp(
-                //     modelComponent.modelTransform.rotation,
-                //     rotation,
-                //     Time.deltaTime * 3f
-                // );
-                // modelComponent.modelTransform.position = Vector3.Lerp(
-                //     modelComponent.modelTransform.position,
-                //     playerModelComponent.modelTransform.position,
-                //     Time.deltaTime * 0.1f
-                // );
+                float distance = Vector3.Distance(targetPos, model.modelTransform.position);
+                if (distance > 7.5f)
+                {
+                    movable.direction = Vector3.forward;
+                }
+                else
+                {
+                    movable.direction = Vector3.zero;
+                }
             }
         }
     }

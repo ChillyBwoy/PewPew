@@ -1,7 +1,6 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
-using PewPew.Data;
 using PewPew.UnityComponents;
 
 namespace PewPew.Systems
@@ -16,6 +15,7 @@ namespace PewPew.Systems
             EcsEntity entity = world.NewEntity();
 
             ref var player = ref entity.Get<PlayerComponent>();
+            ref var character = ref entity.Get<CharacterComponent>();
             ref var movable = ref entity.Get<MovableComponent>();
             ref var model = ref entity.Get<ModelComponent>();
             ref var inputAxis = ref entity.Get<InputAxisComponent>();
@@ -28,9 +28,12 @@ namespace PewPew.Systems
                 Quaternion.identity
             );
 
+            CharacterData characterData = go.GetComponent<CharacterData>();
             MovableData movableData = go.GetComponent<MovableData>();
             GroundCheckData groundCheckData = go.GetComponent<GroundCheckData>();
             JumpData jumpData = go.GetComponent<JumpData>();
+
+            character.eyesTransform = characterData.eyesTransform;
 
             movable.characterController = movableData.characterController;
             movable.speed = movableData.speed;
@@ -38,7 +41,6 @@ namespace PewPew.Systems
             movable.direction = Vector3.forward;
 
             model.modelTransform = go.transform;
-
 
             groundCheckSphere.groundCheckSphere = groundCheckData.groundCheckSphere;
             groundCheckSphere.groundDistance = groundCheckData.groundDistance;

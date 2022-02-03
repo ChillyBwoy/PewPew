@@ -1,8 +1,15 @@
 using UnityEngine;
-using PewPew.Data;
 
 namespace PewPew.Components
 {
+    public enum CameraMode
+    {
+        FirstPerson,
+        ThirdPerson,
+        FlyMode,
+        Arena,
+    }
+
     public struct CameraComponent
     {
         public Transform transform;

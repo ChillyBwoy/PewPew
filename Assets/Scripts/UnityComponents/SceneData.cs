@@ -1,5 +1,5 @@
 using UnityEngine;
-using PewPew.Data;
+using PewPew.Components;
 
 namespace PewPew.UnityComponents
 {

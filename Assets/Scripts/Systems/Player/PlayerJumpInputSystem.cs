@@ -4,7 +4,7 @@ using PewPew.Components;
 
 namespace PewPew.Systems
 {
-    sealed class PlayerJumpSendEventSystem : IEcsRunSystem
+    sealed class PlayerJumpInputSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PlayerComponent, JumpComponent> playerFilter = null;
 

@@ -1,5 +1,4 @@
 using Leopotam.Ecs;
-using PewPew.Data;
 
 namespace PewPew.Components
 {

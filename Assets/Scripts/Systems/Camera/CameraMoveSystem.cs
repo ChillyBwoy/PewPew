@@ -1,7 +1,6 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
-using PewPew.Data;
 using PewPew.UnityComponents;
 
 namespace PewPew.Systems
