@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace PewPew.Components
+namespace PewPew.UnityComponents
 {
-    public struct PlayerComponent
+    public class PlayerData : MonoBehaviour
     {
         public Transform bulletSpawnPoint;
         public GameObject bulletPrefab;

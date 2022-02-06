@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 6232431573307323713}
   - component: {fileID: 6232431573307323718}
   - component: {fileID: 6232431573307323716}
+  - component: {fileID: -8494329777320130904}
   - component: {fileID: 6666196067760244058}
   - component: {fileID: 1624900094684290615}
   - component: {fileID: 7666039002840960457}
@@ -395,6 +396,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8494329777320130904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232431573307323717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f69cf8e58e9b42f6a10075e8df4ff9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawnPoint: {fileID: 3560581128216193035}
+  bulletPrefab: {fileID: 3965748892636344652, guid: faaa94993a7664e8ea512c6846f366c9, type: 3}
 --- !u!114 &6666196067760244058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,10 +522,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8740857534244467872}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2523303387778990406}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}

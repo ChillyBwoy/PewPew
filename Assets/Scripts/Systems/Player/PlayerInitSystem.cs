@@ -28,10 +28,14 @@ namespace PewPew.Systems
                 Quaternion.identity
             );
 
+            PlayerData playerData = go.GetComponent<PlayerData>();
             CharacterData characterData = go.GetComponent<CharacterData>();
             MovableData movableData = go.GetComponent<MovableData>();
             GroundCheckData groundCheckData = go.GetComponent<GroundCheckData>();
             JumpData jumpData = go.GetComponent<JumpData>();
+
+            player.bulletPrefab = playerData.bulletPrefab;
+            player.bulletSpawnPoint = playerData.bulletSpawnPoint;
 
             character.eyesTransform = characterData.eyesTransform;
 

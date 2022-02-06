@@ -38,6 +38,7 @@ namespace PewPew
             updateSystems
                 .OneFrame<JumpEvent>()
                 .OneFrame<CameraChangeStateEvent>()
+                .OneFrame<ShootEvent>()
                 .Add(new PlayerInitSystem())
                 .Add(new CameraModeInputSystem())
                 .Add(new CameraChangeStateSystem())
@@ -46,8 +47,10 @@ namespace PewPew
                 .Add(new InputAxisSystem())
                 .Add(new PlayerMouseLookSystem())
                 .Add(new GroundCheckSystem())
+                .Add(new PlayerShootInputSystem())
                 .Add(new PlayerJumpInputSystem())
                 .Add(new JumpSystem())
+                .Add(new PlayerShootSystem())
                 .Add(new MovementSystem())
                 .Inject(gameControls)
                 .Inject(sceneData)
