@@ -1,6 +1,6 @@
-using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
+using PewPew.UnityComponents;
 
 namespace PewPew.Systems
 {
@@ -8,10 +8,11 @@ namespace PewPew.Systems
     sealed class CameraModeInputSystem : IEcsRunSystem
     {
         private readonly EcsFilter<CameraComponent> cameraFilter = null;
+        private readonly GameControls gameControls = null;
 
         public void Run()
         {
-            if (!Input.GetKeyDown(KeyCode.Tab))
+            if (!gameControls.Camera.SwitchMode.triggered)
                 return;
 
             foreach (var i in cameraFilter)

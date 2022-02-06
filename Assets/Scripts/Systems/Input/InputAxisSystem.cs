@@ -1,25 +1,30 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
+using PewPew.UnityComponents;
 
 namespace PewPew.Systems
 {
     sealed class InputAxisSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsFilter<InputAxisComponent> filter = null;
+        private readonly GameControls gameControls = null;
         private float axisX;
         private float axisY;
 
         public void Init()
         {
-            axisX = Input.GetAxis("Mouse X");
-            axisY = Input.GetAxis("Mouse Y");
+            Vector2 value = gameControls.Player.Look.ReadValue<Vector2>();
+            axisX = value.x;
+            axisY = value.y;
         }
 
         public void Run()
         {
-            axisX += Input.GetAxis("Mouse X");
-            axisY -= Input.GetAxis("Mouse Y");
+            Vector2 value = gameControls.Player.Look.ReadValue<Vector2>();
+
+            axisX += value.x;
+            axisY -= value.y;
 
             foreach (var i in filter)
             {

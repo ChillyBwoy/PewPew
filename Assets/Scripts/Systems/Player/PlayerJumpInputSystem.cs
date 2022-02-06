@@ -1,16 +1,17 @@
-using UnityEngine;
 using Leopotam.Ecs;
 using PewPew.Components;
+using PewPew.UnityComponents;
 
 namespace PewPew.Systems
 {
     sealed class PlayerJumpInputSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PlayerComponent, JumpComponent> playerFilter = null;
+        private readonly GameControls gameControls = null;
 
         public void Run()
         {
-            if (!Input.GetKeyDown(KeyCode.Space))
+            if (!gameControls.Player.Jump.triggered)
                 return;
 
             foreach (var i in playerFilter)
