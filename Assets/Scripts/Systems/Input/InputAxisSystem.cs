@@ -1,37 +1,37 @@
 using UnityEngine;
 using Leopotam.Ecs;
-using PewPew.Components;
+using PewPew.Components.Input;
 using PewPew.UnityComponents;
 
-namespace PewPew.Systems
+namespace PewPew.Systems.Input
 {
     sealed class InputAxisSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private readonly EcsFilter<InputAxisComponent> filter = null;
-        private readonly GameControls gameControls = null;
-        private float axisX;
-        private float axisY;
+        private readonly EcsFilter<InputAxisComponent> _filter = null;
+        private readonly GameControls _gameControls = null;
+        private float _axisX;
+        private float _axisY;
 
         public void Init()
         {
-            Vector2 value = gameControls.Player.Look.ReadValue<Vector2>();
-            axisX = value.x;
-            axisY = value.y;
+            Vector2 value = _gameControls.Player.Look.ReadValue<Vector2>();
+            _axisX = value.x;
+            _axisY = value.y;
         }
 
         public void Run()
         {
-            Vector2 value = gameControls.Player.Look.ReadValue<Vector2>();
+            Vector2 value = _gameControls.Player.Look.ReadValue<Vector2>();
 
-            axisX += value.x;
-            axisY -= value.y;
+            _axisX += value.x;
+            _axisY -= value.y;
 
-            foreach (var i in filter)
+            foreach (var i in _filter)
             {
-                ref InputAxisComponent axis = ref filter.Get1(i);
+                ref InputAxisComponent inputAxis = ref _filter.Get1(i);
 
-                axis.axis.x = axisX;
-                axis.axis.y = Mathf.Clamp(axisY, -45, 45);
+                inputAxis.value.x = _axisX;
+                inputAxis.value.y = Mathf.Clamp(_axisY, -45, 45);
             }
         }
     }
