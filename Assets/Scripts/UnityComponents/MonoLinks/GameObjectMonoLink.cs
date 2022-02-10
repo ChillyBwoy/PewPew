@@ -1,7 +1,6 @@
 using Leopotam.Ecs;
-
-using PewPew.Lib.MonoLink;
 using PewPew.Components.Common;
+using PewPew.Lib.MonoLink;
 
 namespace PewPew.UnityComponents.MonoLinks
 {

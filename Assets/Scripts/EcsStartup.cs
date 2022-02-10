@@ -3,6 +3,7 @@ using Leopotam.Ecs;
 
 using PewPew.Components.Events;
 using PewPew.Systems;
+using PewPew.Systems.Common;
 using PewPew.Systems.Input;
 using PewPew.Systems.Player;
 using PewPew.UnityComponents;
@@ -41,7 +42,7 @@ namespace PewPew
             _sceneData.prefabFactory.SetWorld(_world);
 
             _initSystems
-                // .Add(new CursorLockSystem())
+                .Add(new CursorLockSystem())
                 .Init();
 
             _updateSystems
@@ -52,6 +53,7 @@ namespace PewPew
                 .Add(new InputPlayerJumpSystem())
                 .Add(new InputAxisSystem())
                 .Add(new PlayerMoveSystem())
+                .Add(new PlayerRotationSystem())
                 .Add(new PlayerJumpSystem())
                 .Inject(_gameControls)
                 .Inject(_sceneData)
@@ -59,7 +61,10 @@ namespace PewPew
                 .Init();
 
             _fixedUpdateSystems
+                .Add(new CharacterSystem())
+                .Add(new PhysicsSystem())
                 .Add(new MoveSystem())
+                .Add(new RotationSystem())
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)

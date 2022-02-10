@@ -1,3 +1,4 @@
+using UnityEngine;
 using Leopotam.Ecs;
 
 using PewPew.Components;
@@ -20,17 +21,22 @@ namespace PewPew.Systems.Player
         {
             playerEntity = _world.NewEntity();
 
+            Vector3 initialPosition = _sceneData.playerSpawnPoint.transform.position;
+            Quaternion initialRotation = _sceneData.playerSpawnPoint.transform.rotation;
+
             playerEntity.Get<SpawnComponent>() = new SpawnComponent
             {
                 prefab = _staticData.playerPrefab,
-                position = _sceneData.playerSpawnPoint.transform.position,
-                rotation = _sceneData.playerSpawnPoint.transform.rotation,
+                position = initialPosition,
+                rotation = initialRotation,
                 parent = null,
             };
             playerEntity.Get<PlayerTag>();
-            playerEntity.Get<DirectionComponent>();
+            playerEntity.Get<DirectionComponent>() = new DirectionComponent { value = Vector3.forward };
+            playerEntity.Get<RotationComponent>() = new RotationComponent { value = initialRotation };
             playerEntity.Get<VelocityComponent>();
             playerEntity.Get<InputDirectionComponent>();
+            playerEntity.Get<InputAxisComponent>();
         }
     }
 }

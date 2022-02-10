@@ -24,11 +24,11 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Look",
+                    "name": "Rotation",
                     "type": "Value",
                     "id": "e55f69b1-dff7-426a-a006-ebca237ea18a",
                     "expectedControlType": "Vector2",
-                    "processors": "ScaleVector2(x=0.1,y=0.1)",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -191,9 +191,9 @@
                     "id": "2ca64ab7-5536-49e8-bc6e-405a3cc5816a",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "",
-                    "action": "Look",
+                    "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -204,7 +204,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -10,11 +10,9 @@ namespace PewPew.UnityComponents
         [Range(1f, 10f)] public float playerSpeed = 5f;
 
         [Header("Input")]
-        [Range(0.1f, 2f)] public float lookSensitivity = 2f;
-        [Range(1f, 5f)] public float jumpForce;
-        [Range(1f, 5f)] public float jumpCooldown;
+        [Range(1f, 10f)] public float lookSensitivity = 5f;
 
         [Header("Physics")]
-        [Range(-100f, 100f)] public float gravity = -25f;
+        public Vector3 gravity;
     }
 }

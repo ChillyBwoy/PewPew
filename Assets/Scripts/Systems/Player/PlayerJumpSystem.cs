@@ -23,7 +23,7 @@ namespace PewPew.Systems.Player
                 ref VelocityComponent velocity = ref _filter.Get3(i);
                 ref JumpEvent jump = ref _filter.Get4(i);
 
-                velocity.value = Vector3.up * Mathf.Sqrt(jump.force * -2f * _staticData.gravity);
+                velocity.value.y = jump.force;
             }
         }
     }

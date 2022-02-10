@@ -48,11 +48,11 @@ namespace PewPew.UnityComponents
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""Rotation"",
                     ""type"": ""Value"",
                     ""id"": ""e55f69b1-dff7-426a-a006-ebca237ea18a"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""ScaleVector2(x=0.1,y=0.1)"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -215,9 +215,9 @@ namespace PewPew.UnityComponents
                     ""id"": ""2ca64ab7-5536-49e8-bc6e-405a3cc5816a"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -228,7 +228,7 @@ namespace PewPew.UnityComponents
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -280,7 +280,7 @@ namespace PewPew.UnityComponents
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+            m_Player_Rotation = m_Player.FindAction("Rotation", throwIfNotFound: true);
             m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
             // Camera
             m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
@@ -346,7 +346,7 @@ namespace PewPew.UnityComponents
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Jump;
-        private readonly InputAction m_Player_Look;
+        private readonly InputAction m_Player_Rotation;
         private readonly InputAction m_Player_Shoot;
         public struct PlayerActions
         {
@@ -354,7 +354,7 @@ namespace PewPew.UnityComponents
             public PlayerActions(@GameControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
-            public InputAction @Look => m_Wrapper.m_Player_Look;
+            public InputAction @Rotation => m_Wrapper.m_Player_Rotation;
             public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -371,9 +371,9 @@ namespace PewPew.UnityComponents
                     @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                    @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                    @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                    @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Rotation.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotation;
+                    @Rotation.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotation;
+                    @Rotation.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotation;
                     @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                     @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                     @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
@@ -387,9 +387,9 @@ namespace PewPew.UnityComponents
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
-                    @Look.started += instance.OnLook;
-                    @Look.performed += instance.OnLook;
-                    @Look.canceled += instance.OnLook;
+                    @Rotation.started += instance.OnRotation;
+                    @Rotation.performed += instance.OnRotation;
+                    @Rotation.canceled += instance.OnRotation;
                     @Shoot.started += instance.OnShoot;
                     @Shoot.performed += instance.OnShoot;
                     @Shoot.canceled += instance.OnShoot;
@@ -434,7 +434,7 @@ namespace PewPew.UnityComponents
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
-            void OnLook(InputAction.CallbackContext context);
+            void OnRotation(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
         }
         public interface ICameraActions

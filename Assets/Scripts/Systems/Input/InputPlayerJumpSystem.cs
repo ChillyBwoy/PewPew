@@ -1,7 +1,7 @@
 using UnityEngine;
 using Leopotam.Ecs;
 
-using PewPew.Components.Physics;
+using PewPew.Components;
 using PewPew.Components.Tags;
 using PewPew.Components.Events;
 using PewPew.UnityComponents;
@@ -10,7 +10,7 @@ namespace PewPew.Systems.Input
 {
     sealed class InputPlayerJumpSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag, RigidbodyComponent, CapsuleColliderComponent> _filter = null;
+        private readonly EcsFilter<PlayerTag, CharacterComponent> _filter = null;
         private readonly GameControls _gameControls = null;
         private readonly StaticData _staticData = null;
 
@@ -21,22 +21,18 @@ namespace PewPew.Systems.Input
 
             foreach (var i in _filter)
             {
-                ref RigidbodyComponent rigidBody = ref _filter.Get2(i);
-                ref CapsuleColliderComponent collider = ref _filter.Get3(i);
+                ref CharacterComponent character = ref _filter.Get2(i);
+                ref Rigidbody rigidBody = ref character.rigidbody;
+                ref CapsuleCollider collider = ref character.capsuleCollider;
 
-                bool isGrounded = Physics.Raycast(
-                    rigidBody.value.transform.position,
-                    Vector3.down,
-                    collider.value.height / 2 + 0.1f
-                );
-
-                if (isGrounded)
+                if (character.isGrounded)
                 {
                     ref EcsEntity entity = ref _filter.GetEntity(i);
+                    float jumpForce = 2 * Mathf.Pow(_staticData.gravity.y, 2);
+
                     entity.Get<JumpEvent>() = new JumpEvent
                     {
-                        force = _staticData.jumpForce,
-                        cooldown = _staticData.jumpCooldown
+                        force = jumpForce
                     };
                 }
             }

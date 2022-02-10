@@ -9,29 +9,22 @@ namespace PewPew.Systems.Input
     {
         private readonly EcsFilter<InputAxisComponent> _filter = null;
         private readonly GameControls _gameControls = null;
-        private float _axisX;
-        private float _axisY;
+
+        private Vector2 _value;
 
         public void Init()
         {
-            Vector2 value = _gameControls.Player.Look.ReadValue<Vector2>();
-            _axisX = value.x;
-            _axisY = value.y;
+            _value = _gameControls.Player.Rotation.ReadValue<Vector2>();
         }
 
         public void Run()
         {
-            Vector2 value = _gameControls.Player.Look.ReadValue<Vector2>();
-
-            _axisX += value.x;
-            _axisY -= value.y;
+            _value = _gameControls.Player.Rotation.ReadValue<Vector2>();
 
             foreach (var i in _filter)
             {
                 ref InputAxisComponent inputAxis = ref _filter.Get1(i);
-
-                inputAxis.value.x = _axisX;
-                inputAxis.value.y = Mathf.Clamp(_axisY, -45, 45);
+                inputAxis.value = _value;
             }
         }
     }
