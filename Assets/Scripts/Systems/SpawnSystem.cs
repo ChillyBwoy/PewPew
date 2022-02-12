@@ -6,7 +6,7 @@ using PewPew.UnityComponents;
 
 namespace PewPew.Systems
 {
-    sealed class SpawnSystem : IEcsRunSystem
+    sealed class SpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsWorld _world = null;
         private readonly SceneData _sceneData = null;
@@ -18,7 +18,17 @@ namespace PewPew.Systems
             _factory = factory;
         }
 
+        public void Init()
+        {
+            Dispatch();
+        }
+
         public void Run()
+        {
+            Dispatch();
+        }
+
+        private void Dispatch()
         {
             if (_spawnFilter.IsEmpty())
                 return;

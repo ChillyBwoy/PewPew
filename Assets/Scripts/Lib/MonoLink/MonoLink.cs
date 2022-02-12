@@ -4,7 +4,7 @@ namespace PewPew.Lib.MonoLink
 {
     public class MonoLink<T> : MonoLinkBase where T : struct
     {
-        public T value;
+        public T properties;
 
         public override void Make(ref EcsEntity entity)
         {
@@ -13,7 +13,7 @@ namespace PewPew.Lib.MonoLink
                 return;
             }
 
-            entity.Get<T>() = value;
+            entity.Get<T>() = properties;
         }
     }
 }

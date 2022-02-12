@@ -9,6 +9,7 @@ namespace PewPew.Systems.Input
     {
         private readonly EcsFilter<InputAxisComponent> _filter = null;
         private readonly GameControls _gameControls = null;
+        private readonly StaticData _staticData = null;
 
         private Vector2 _value;
 
@@ -24,7 +25,7 @@ namespace PewPew.Systems.Input
             foreach (var i in _filter)
             {
                 ref InputAxisComponent inputAxis = ref _filter.Get1(i);
-                inputAxis.value = _value;
+                inputAxis.value = _value * _staticData.lookSensitivity * Time.deltaTime;
             }
         }
     }

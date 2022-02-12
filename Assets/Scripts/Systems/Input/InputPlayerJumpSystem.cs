@@ -23,7 +23,6 @@ namespace PewPew.Systems.Input
             {
                 ref CharacterComponent character = ref _filter.Get2(i);
                 ref Rigidbody rigidBody = ref character.rigidbody;
-                ref CapsuleCollider collider = ref character.capsuleCollider;
 
                 if (character.isGrounded)
                 {

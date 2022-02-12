@@ -9,14 +9,14 @@ namespace PewPew.UnityComponents.MonoLinks
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (value.capsuleCollider == null)
+            if (properties.collider == null)
             {
-                value.capsuleCollider = GetComponent<CapsuleCollider>();
+                properties.collider = GetComponent<Collider>();
             }
 
-            if (value.rigidbody == null)
+            if (properties.rigidbody == null)
             {
-                value.rigidbody = GetComponent<Rigidbody>();
+                properties.rigidbody = GetComponent<Rigidbody>();
             }
         }
 #endif

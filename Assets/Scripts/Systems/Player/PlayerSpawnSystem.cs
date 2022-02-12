@@ -15,28 +15,26 @@ namespace PewPew.Systems.Player
         private readonly StaticData _staticData = null;
         private readonly SceneData _sceneData = null;
 
-        private EcsEntity playerEntity;
-
         public void Init()
         {
-            playerEntity = _world.NewEntity();
+            EcsEntity entity = _world.NewEntity();
 
             Vector3 initialPosition = _sceneData.playerSpawnPoint.transform.position;
             Quaternion initialRotation = _sceneData.playerSpawnPoint.transform.rotation;
 
-            playerEntity.Get<SpawnComponent>() = new SpawnComponent
+            entity.Get<SpawnComponent>() = new SpawnComponent
             {
                 prefab = _staticData.playerPrefab,
                 position = initialPosition,
                 rotation = initialRotation,
                 parent = null,
             };
-            playerEntity.Get<PlayerTag>();
-            playerEntity.Get<DirectionComponent>() = new DirectionComponent { value = Vector3.forward };
-            playerEntity.Get<RotationComponent>() = new RotationComponent { value = initialRotation };
-            playerEntity.Get<VelocityComponent>();
-            playerEntity.Get<InputDirectionComponent>();
-            playerEntity.Get<InputAxisComponent>();
+            entity.Get<PlayerTag>();
+            entity.Get<DirectionComponent>() = new DirectionComponent { value = Vector3.forward };
+            entity.Get<RotationComponent>() = new RotationComponent { value = initialRotation };
+            entity.Get<VelocityComponent>();
+            entity.Get<InputDirectionComponent>();
+            entity.Get<InputAxisComponent>();
         }
     }
 }

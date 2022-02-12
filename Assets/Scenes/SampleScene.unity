@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18332
+  m_Name: pb_Mesh18328
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3166,7 +3166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &963194226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3244,6 +3244,7 @@ GameObject:
   - component: {fileID: 1141077089}
   - component: {fileID: 1141077091}
   - component: {fileID: 1141077092}
+  - component: {fileID: 1141077093}
   m_Layer: 0
   m_Name: PewPewGame
   m_TagString: Untagged
@@ -3304,6 +3305,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4af6681d7113f4629ba3408ad9edbb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1141077093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141077088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb515ac1f5aab4124af693a6fe4bf4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1185821264

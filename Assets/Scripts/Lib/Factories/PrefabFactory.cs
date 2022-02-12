@@ -7,13 +7,6 @@ namespace PewPew.Lib.Factories
 {
     public class PrefabFactory : MonoBehaviour
     {
-        private EcsWorld _world = null;
-
-        public void SetWorld(EcsWorld world)
-        {
-            _world = world;
-        }
-
         public void Spawn(ref EcsEntity entity, SpawnComponent spawnComponent)
         {
             GameObject gameObject = Instantiate(

@@ -10,7 +10,7 @@ namespace PewPew.UnityComponents
         [Range(1f, 10f)] public float playerSpeed = 5f;
 
         [Header("Input")]
-        [Range(1f, 10f)] public float lookSensitivity = 5f;
+        [Range(1f, 99f)] public float lookSensitivity = 99f;
 
         [Header("Physics")]
         public Vector3 gravity;

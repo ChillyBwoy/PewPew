@@ -7,9 +7,7 @@ namespace PewPew.Components
     public struct CharacterComponent
     {
         public bool isGrounded;
-        public CapsuleCollider capsuleCollider;
+        public Collider collider;
         public Rigidbody rigidbody;
-        public Transform head;
-        public Transform body;
     }
 }

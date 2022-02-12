@@ -16,11 +16,42 @@ namespace PewPew
         private EcsSystems _initSystems = null;
         private EcsSystems _updateSystems = null;
         private EcsSystems _fixedUpdateSystems = null;
+        private EcsSystems _lateUpdateSystems = null;
         private GameControls _gameControls = null;
         [SerializeField]
         private SceneData _sceneData;
         [SerializeField]
         private StaticData _staticData;
+
+        private EcsSystems SpawnSystems()
+        {
+            var systems = new EcsSystems(_world);
+            systems.Add(new PlayerSpawnSystem());
+            return systems;
+        }
+
+        private EcsSystems InputSystems()
+        {
+            var systems = new EcsSystems(_world);
+            systems
+                .Add(new InputDirectionSystem())
+                .Add(new InputPlayerJumpSystem())
+                .Add(new InputAxisSystem());
+
+            return systems;
+        }
+
+        private EcsSystems PlayersSystems()
+        {
+            var systems = new EcsSystems(_world);
+
+            systems
+                .Add(new PlayerMoveSystem())
+                .Add(new PlayerRotationSystem())
+                .Add(new PlayerJumpSystem());
+
+            return systems;
+        }
 
         void Start()
         {
@@ -28,6 +59,7 @@ namespace PewPew
             _initSystems = new EcsSystems(_world);
             _updateSystems = new EcsSystems(_world);
             _fixedUpdateSystems = new EcsSystems(_world);
+            _lateUpdateSystems = new EcsSystems(_world);
             _gameControls = new GameControls();
 
             _gameControls.Enable();
@@ -39,28 +71,28 @@ namespace PewPew
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_fixedUpdateSystems);
 #endif
 
-            _sceneData.prefabFactory.SetWorld(_world);
-
             _initSystems
                 .Add(new CursorLockSystem())
                 .Init();
 
             _updateSystems
                 .OneFrame<JumpEvent>()
-                .Add(new PlayerSpawnSystem())
+                .Add(SpawnSystems())
                 .Add(new SpawnSystem(_sceneData.prefabFactory))
-                .Add(new InputDirectionSystem())
-                .Add(new InputPlayerJumpSystem())
-                .Add(new InputAxisSystem())
-                .Add(new PlayerMoveSystem())
-                .Add(new PlayerRotationSystem())
-                .Add(new PlayerJumpSystem())
+                .Add(InputSystems())
+                .Add(PlayersSystems())
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)
                 .Init();
 
             _fixedUpdateSystems
+                .Inject(_gameControls)
+                .Inject(_sceneData)
+                .Inject(_staticData)
+                .Init();
+
+            _lateUpdateSystems
                 .Add(new CharacterSystem())
                 .Add(new PhysicsSystem())
                 .Add(new MoveSystem())
@@ -81,6 +113,11 @@ namespace PewPew
             _updateSystems?.Run();
         }
 
+        private void LateUpdate()
+        {
+            _lateUpdateSystems?.Run();
+        }
+
         void OnDestroy()
         {
             _gameControls?.Disable();
@@ -93,6 +130,9 @@ namespace PewPew
 
             _fixedUpdateSystems?.Destroy();
             _fixedUpdateSystems = null;
+
+            _lateUpdateSystems?.Destroy();
+            _lateUpdateSystems = null;
 
             _world.Destroy();
             _world = null;
