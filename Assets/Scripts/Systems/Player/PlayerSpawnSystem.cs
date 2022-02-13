@@ -30,6 +30,7 @@ namespace PewPew.Systems.Player
                 parent = null,
             };
             entity.Get<PlayerTag>();
+            entity.Get<CameraTargetTag>();
             entity.Get<DirectionComponent>() = new DirectionComponent { value = Vector3.forward };
             entity.Get<RotationComponent>() = new RotationComponent { value = initialRotation };
             entity.Get<VelocityComponent>();

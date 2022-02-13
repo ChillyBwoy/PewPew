@@ -3,6 +3,7 @@ using Leopotam.Ecs;
 
 using PewPew.Components.Events;
 using PewPew.Systems;
+using PewPew.Systems.Camera;
 using PewPew.Systems.Common;
 using PewPew.Systems.Input;
 using PewPew.Systems.Player;
@@ -77,6 +78,8 @@ namespace PewPew
 
             _updateSystems
                 .OneFrame<JumpEvent>()
+                .Add(new CameraInitSystem())
+                .Add(new CameraModeInputSystem())
                 .Add(SpawnSystems())
                 .Add(new SpawnSystem(_sceneData.prefabFactory))
                 .Add(InputSystems())

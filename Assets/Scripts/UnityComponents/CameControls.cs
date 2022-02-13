@@ -257,6 +257,15 @@ namespace PewPew.UnityComponents
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6c65911-9b17-454b-89c6-9f6d9d32b83b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -268,6 +277,39 @@ namespace PewPew.UnityComponents
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0423f2d4-fe6e-453b-89aa-753ec1d94b2a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""471c9385-49d6-489a-b641-dbdd03ac78db"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89be1108-3dda-40cc-82e0-1b20eaf96bd5"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextTarget"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -285,6 +327,7 @@ namespace PewPew.UnityComponents
             // Camera
             m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
             m_Camera_SwitchMode = m_Camera.FindAction("SwitchMode", throwIfNotFound: true);
+            m_Camera_NextTarget = m_Camera.FindAction("NextTarget", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -402,11 +445,13 @@ namespace PewPew.UnityComponents
         private readonly InputActionMap m_Camera;
         private ICameraActions m_CameraActionsCallbackInterface;
         private readonly InputAction m_Camera_SwitchMode;
+        private readonly InputAction m_Camera_NextTarget;
         public struct CameraActions
         {
             private @GameControls m_Wrapper;
             public CameraActions(@GameControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @SwitchMode => m_Wrapper.m_Camera_SwitchMode;
+            public InputAction @NextTarget => m_Wrapper.m_Camera_NextTarget;
             public InputActionMap Get() { return m_Wrapper.m_Camera; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -419,6 +464,9 @@ namespace PewPew.UnityComponents
                     @SwitchMode.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnSwitchMode;
                     @SwitchMode.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnSwitchMode;
                     @SwitchMode.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnSwitchMode;
+                    @NextTarget.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnNextTarget;
+                    @NextTarget.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnNextTarget;
+                    @NextTarget.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnNextTarget;
                 }
                 m_Wrapper.m_CameraActionsCallbackInterface = instance;
                 if (instance != null)
@@ -426,6 +474,9 @@ namespace PewPew.UnityComponents
                     @SwitchMode.started += instance.OnSwitchMode;
                     @SwitchMode.performed += instance.OnSwitchMode;
                     @SwitchMode.canceled += instance.OnSwitchMode;
+                    @NextTarget.started += instance.OnNextTarget;
+                    @NextTarget.performed += instance.OnNextTarget;
+                    @NextTarget.canceled += instance.OnNextTarget;
                 }
             }
         }
@@ -440,6 +491,7 @@ namespace PewPew.UnityComponents
         public interface ICameraActions
         {
             void OnSwitchMode(InputAction.CallbackContext context);
+            void OnNextTarget(InputAction.CallbackContext context);
         }
     }
 }
