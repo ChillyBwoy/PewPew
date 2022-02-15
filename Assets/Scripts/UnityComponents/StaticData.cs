@@ -7,12 +7,16 @@ namespace PewPew.UnityComponents
     {
         [Header("Player")]
         public GameObject playerPrefab;
-        [Range(1f, 10f)] public float playerSpeed = 5f;
+
+        [Header("NPC")]
+        public GameObject enemyPrefab;
 
         [Header("Input")]
+        [Range(1f, 99f)] public float playerSpeed = 5f;
         [Range(1f, 99f)] public float lookSensitivity = 99f;
+        [Range(1f, 100f)] public float jumpForce = 3.5f;
 
         [Header("Physics")]
-        public Vector3 gravity;
+        public Vector3 gravity = new Vector3(0, 9.81f, 0);
     }
 }

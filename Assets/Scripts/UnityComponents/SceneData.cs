@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using PewPew.Components.Camera;
 using PewPew.Lib.Factories;
 
 namespace PewPew.UnityComponents
@@ -12,7 +13,11 @@ namespace PewPew.UnityComponents
         [Header("Player")]
         public Transform playerSpawnPoint;
 
+        [Header("NPC")]
+        public Transform[] enemySpawnPoints;
+
         [Header("Camera")]
         public Camera mainCamera;
+        public CameraMode cameraMode;
     }
 }

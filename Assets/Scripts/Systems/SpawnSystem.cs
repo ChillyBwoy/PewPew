@@ -8,8 +8,6 @@ namespace PewPew.Systems
 {
     sealed class SpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private readonly EcsWorld _world = null;
-        private readonly SceneData _sceneData = null;
         private readonly EcsFilter<SpawnComponent> _spawnFilter = null;
         private PrefabFactory _factory = null;
 

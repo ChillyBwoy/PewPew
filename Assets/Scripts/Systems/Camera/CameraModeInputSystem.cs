@@ -22,10 +22,14 @@ namespace PewPew.Systems.Camera
                 switch (camera.mode)
                 {
                     case CameraMode.FirstPerson:
-                        camera.mode = CameraMode.SceneMode;
+                        camera.mode = CameraMode.ThirdPerson;
                         break;
 
-                    case CameraMode.SceneMode:
+                    case CameraMode.ThirdPerson:
+                        camera.mode = CameraMode.ThirdPersonFly;
+                        break;
+
+                    case CameraMode.ThirdPersonFly:
                         camera.mode = CameraMode.FirstPerson;
                         break;
                 }

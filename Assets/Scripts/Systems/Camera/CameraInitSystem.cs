@@ -1,5 +1,6 @@
 using Leopotam.Ecs;
 
+using PewPew.Components;
 using PewPew.Components.Camera;
 using PewPew.UnityComponents;
 
@@ -16,8 +17,10 @@ namespace PewPew.Systems.Camera
 
             entity.Get<CameraComponent>() = new CameraComponent
             {
-                mode = CameraMode.FirstPerson
+                mode = _sceneData.cameraMode
             };
+            entity.Get<DirectionComponent>();
+            entity.Get<RotationComponent>();
         }
     }
 }

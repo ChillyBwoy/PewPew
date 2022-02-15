@@ -5,6 +5,7 @@ using PewPew.Components.Events;
 using PewPew.Systems;
 using PewPew.Systems.Camera;
 using PewPew.Systems.Common;
+using PewPew.Systems.Enemy;
 using PewPew.Systems.Input;
 using PewPew.Systems.Player;
 using PewPew.UnityComponents;
@@ -28,17 +29,7 @@ namespace PewPew
         {
             var systems = new EcsSystems(_world);
             systems.Add(new PlayerSpawnSystem());
-            return systems;
-        }
-
-        private EcsSystems InputSystems()
-        {
-            var systems = new EcsSystems(_world);
-            systems
-                .Add(new InputDirectionSystem())
-                .Add(new InputPlayerJumpSystem())
-                .Add(new InputAxisSystem());
-
+            systems.Add(new EnemySpawnSystem());
             return systems;
         }
 
@@ -50,6 +41,17 @@ namespace PewPew
                 .Add(new PlayerMoveSystem())
                 .Add(new PlayerRotationSystem())
                 .Add(new PlayerJumpSystem());
+
+            return systems;
+        }
+
+        private EcsSystems CameraSystems()
+        {
+            var systems = new EcsSystems(_world);
+            systems
+                .Add(new CameraInitSystem())
+                .Add(new CameraModeInputSystem())
+                .Add(new CameraMoveSystem());
 
             return systems;
         }
@@ -77,29 +79,27 @@ namespace PewPew
                 .Init();
 
             _updateSystems
-                .OneFrame<JumpEvent>()
-                .Add(new CameraInitSystem())
-                .Add(new CameraModeInputSystem())
+                .OneFrame<EnemySpawnEvent>()
                 .Add(SpawnSystems())
                 .Add(new SpawnSystem(_sceneData.prefabFactory))
-                .Add(InputSystems())
+                .Add(new InputAxisSystem())
                 .Add(PlayersSystems())
+                .Add(CameraSystems())
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)
                 .Init();
 
             _fixedUpdateSystems
+                .Add(new MoveSystem())
+                .Add(new RotationSystem())
+                .Add(new VelocitySystem())
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)
                 .Init();
 
             _lateUpdateSystems
-                .Add(new CharacterSystem())
-                .Add(new PhysicsSystem())
-                .Add(new MoveSystem())
-                .Add(new RotationSystem())
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)

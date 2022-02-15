@@ -25,7 +25,7 @@ namespace PewPew.Systems.Input
             foreach (var i in _filter)
             {
                 ref InputAxisComponent inputAxis = ref _filter.Get1(i);
-                inputAxis.value = _value * _staticData.lookSensitivity * Time.deltaTime;
+                inputAxis.value = _value.normalized * _staticData.lookSensitivity;
             }
         }
     }

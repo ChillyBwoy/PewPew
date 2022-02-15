@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace PewPew.Components.Camera
@@ -5,8 +6,11 @@ namespace PewPew.Components.Camera
     public enum CameraMode
     {
         FirstPerson,
-        SceneMode,
+        ThirdPerson,
+        ThirdPersonFly,
     }
+
+    [Serializable]
     public struct CameraComponent
     {
         public CameraMode mode;
