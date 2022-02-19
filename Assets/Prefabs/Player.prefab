@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &234494353048088461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1638455195486247999}
+  m_Layer: 0
+  m_Name: CameraMount
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1638455195486247999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234494353048088461}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.324, z: 0.605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2717092803341872062}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2717092803341872063
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,6 +44,7 @@ GameObject:
   - component: {fileID: 2717092803341872058}
   - component: {fileID: 2717092803341872059}
   - component: {fileID: 126239259498996172}
+  - component: {fileID: 5554307614516296852}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35,6 +66,7 @@ Transform:
   - {fileID: 2717092803586251207}
   - {fileID: 1197060233204308553}
   - {fileID: 4304456031812217068}
+  - {fileID: 1638455195486247999}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -107,6 +139,20 @@ MonoBehaviour:
   properties:
     collider: {fileID: 2717092803341872057}
     rigidbody: {fileID: 2717092803341872056}
+--- !u!114 &5554307614516296852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717092803341872063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eee7c624c1cb431cb5250859b488b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  properties:
+    transform: {fileID: 1638455195486247999}
 --- !u!1 &2717092803586251192
 GameObject:
   m_ObjectHideFlags: 0

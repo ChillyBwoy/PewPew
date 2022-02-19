@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 using PewPew.Components.Camera;
 using PewPew.Lib.Factories;
@@ -17,7 +18,7 @@ namespace PewPew.UnityComponents
         public Transform[] enemySpawnPoints;
 
         [Header("Camera")]
-        public Camera mainCamera;
+        public CinemachineVirtualCamera mainCamera;
         public CameraMode cameraMode;
     }
 }
