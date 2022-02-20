@@ -28,20 +28,19 @@ namespace PewPew
         private EcsSystems SpawnSystems()
         {
             var systems = new EcsSystems(_world);
-            systems.Add(new PlayerSpawnSystem());
-            systems.Add(new EnemySpawnSystem());
+            systems
+                .Add(new PlayerSpawnSystem())
+                .Add(new EnemySpawnSystem());
             return systems;
         }
 
         private EcsSystems PlayersSystems()
         {
             var systems = new EcsSystems(_world);
-
             systems
                 .Add(new PlayerMoveSystem())
                 .Add(new PlayerRotationSystem())
                 .Add(new PlayerJumpSystem());
-
             return systems;
         }
 
@@ -49,10 +48,11 @@ namespace PewPew
         {
             var systems = new EcsSystems(_world);
             systems
+                .OneFrame<CameraChangeModeEvent>()
                 .Add(new CameraInitSystem())
-                .Add(new CameraModeInputSystem())
+                .Add(new CameraInputSystem())
+                .Add(new CameraChangeModeSystem())
                 .Add(new CameraMoveSystem());
-
             return systems;
         }
 
@@ -79,12 +79,12 @@ namespace PewPew
                 .Init();
 
             _updateSystems
-                .OneFrame<EnemySpawnEvent>()
                 .Add(SpawnSystems())
                 .Add(new SpawnSystem(_sceneData.prefabFactory))
                 .Add(new InputAxisSystem())
                 .Add(PlayersSystems())
-                .Add(CameraSystems())
+                .OneFrame<EnemySpawnEvent>()
+                .OneFrame<PlayerSpawnEvent>()
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)
@@ -100,6 +100,7 @@ namespace PewPew
                 .Init();
 
             _lateUpdateSystems
+                .Add(CameraSystems())
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)

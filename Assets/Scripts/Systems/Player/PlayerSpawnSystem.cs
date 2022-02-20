@@ -3,6 +3,7 @@ using Leopotam.Ecs;
 
 using PewPew.Components;
 using PewPew.Components.Common;
+using PewPew.Components.Events;
 using PewPew.Components.Input;
 using PewPew.Components.Tags;
 using PewPew.UnityComponents;
@@ -14,9 +15,16 @@ namespace PewPew.Systems.Player
         private readonly EcsWorld _world = null;
         private readonly StaticData _staticData = null;
         private readonly SceneData _sceneData = null;
+        private readonly EcsFilter<PlayerTag> _playerFilter = null;
 
         public void Init()
         {
+            // check if there is already a player created
+            if (!_playerFilter.IsEmpty())
+            {
+                return;
+            }
+
             EcsEntity entity = _world.NewEntity();
 
             Transform spawnPoint = _sceneData.playerSpawnPoint.transform;
@@ -34,6 +42,7 @@ namespace PewPew.Systems.Player
             entity.Get<RotationComponent>() = new RotationComponent { value = spawnPoint.rotation };
             entity.Get<VelocityComponent>() = new VelocityComponent { value = Vector3.zero };
             entity.Get<InputAxisComponent>();
+            entity.Get<PlayerSpawnEvent>();
         }
     }
 }

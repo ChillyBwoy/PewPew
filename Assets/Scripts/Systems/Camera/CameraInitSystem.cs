@@ -1,8 +1,9 @@
 using Leopotam.Ecs;
 
-using PewPew.Components;
 using PewPew.Components.Camera;
+using PewPew.Components.Events;
 using PewPew.Components.Input;
+using PewPew.Components.Tags;
 using PewPew.UnityComponents;
 
 namespace PewPew.Systems.Camera
@@ -11,20 +12,23 @@ namespace PewPew.Systems.Camera
     {
         private readonly EcsWorld _world = null;
         private readonly SceneData _sceneData = null;
-        private readonly EcsFilter<CameraComponent> _filter = null;
+        private readonly EcsFilter<CameraComponent> _cameraFilter = null;
+        private readonly EcsFilter<PlayerTag, PlayerSpawnEvent, CameraMountComponent> _playerFilter = null;
 
         public void Init()
         {
-            if (!_filter.IsEmpty())
+            if (!_cameraFilter.IsEmpty())
             {
                 return;
             }
 
             EcsEntity entity = _world.NewEntity();
+            ref CameraMountComponent cameraMount = ref _playerFilter.Get3(0);
 
             entity.Get<CameraComponent>() = new CameraComponent
             {
-                mode = _sceneData.cameraMode
+                mode = _sceneData.cameraMode,
+                target = cameraMount.transform
             };
             entity.Get<InputAxisComponent>();
         }
