@@ -1,26 +1,24 @@
 using UnityEngine;
-using PewPew.Components;
+using Cinemachine;
+
+using PewPew.Components.Camera;
+using PewPew.Lib.Factories;
 
 namespace PewPew.UnityComponents
 {
     public class SceneData : MonoBehaviour
     {
+        [Header("Common")]
+        public PrefabFactory prefabFactory;
+
         [Header("Player")]
-        public GameObject playerPrefab;
         public Transform playerSpawnPoint;
 
-        [Header("Enemy")]
-        public GameObject enemyPrefab;
-        public Transform enemySpawnPoint;
+        [Header("NPC")]
+        public Transform[] enemySpawnPoints;
 
         [Header("Camera")]
-        public Camera mainCamera;
-        [Range(1f, 5f)] public float cameraDistance = 2f;
-        [Range(0f, 5f)] public float cameraVerticalOffset = 2f;
-        [Range(0f, 3f)] public float cameraFocusRadius = 1f;
-        public CameraMode cameraMode = CameraMode.FirstPerson;
-
-        [Header("Input")]
-        [Range(0.1f, 2f)] public float lookSensitivity = 2f;
+        public CinemachineVirtualCamera mainCamera;
+        public CameraMode cameraMode;
     }
 }

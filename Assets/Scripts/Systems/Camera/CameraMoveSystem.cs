@@ -1,75 +1,71 @@
+using Cinemachine;
 using UnityEngine;
 using Leopotam.Ecs;
-using PewPew.Components;
+
+using PewPew.Components.Camera;
+using PewPew.Components.Input;
 using PewPew.UnityComponents;
 
-namespace PewPew.Systems
+namespace PewPew.Systems.Camera
 {
     sealed class CameraMoveSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<CameraComponent, InputAxisComponent> filter = null;
-        private readonly SceneData sceneData = null;
+        private readonly EcsFilter<CameraComponent, InputAxisComponent> _cameraFilter = null;
+        private readonly SceneData _sceneData = null;
 
         public void Run()
         {
-            foreach (var i in filter)
+            if (_cameraFilter.IsEmpty())
             {
-                ref CameraComponent camera = ref filter.Get1(i);
-                ref InputAxisComponent inputAxis = ref filter.Get2(i);
-
-                switch (camera.mode)
-                {
-                    case CameraMode.FirstPerson:
-                        FirstPersonMode(camera, inputAxis);
-                        break;
-
-                    case CameraMode.ThirdPerson:
-                        ThirdPersonMode(camera, inputAxis);
-                        break;
-
-                    case CameraMode.FlyMode:
-                        FlyMode(camera, inputAxis);
-                        break;
-
-                    case CameraMode.Arena:
-                        ArenaMode(camera, inputAxis);
-                        break;
-                }
+                return;
             }
-        }
 
-        private void ThirdPersonMode(CameraComponent camera, InputAxisComponent inputAxis)
-        {
-            Vector3 targetPos = camera.lookTarget.position;
-            Vector2 orbitAngles = new Vector2(45f, 0f);
-            Quaternion lookRotation = Quaternion.Euler(orbitAngles);
+            ref EcsEntity entity = ref _cameraFilter.GetEntity(0);
 
-            Vector3 lookDirection = lookRotation * Vector3.forward;
-            Vector3 lookPosition = targetPos - lookDirection * camera.distance;
+            if (!entity.Has<CameraComponent>())
+            {
+                return;
+            }
 
-            camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
-        }
+            ref var camera = ref entity.Get<CameraComponent>();
+            ref var inputAxis = ref entity.Get<InputAxisComponent>();
 
-        private void ArenaMode(CameraComponent camera, InputAxisComponent inputAxis)
-        {
-            Vector3 targetPos = camera.lookTarget.position;
-            camera.transform.forward = Vector3.down;
-            camera.transform.position = new Vector3(0, 15f, 0);
-            camera.transform.LookAt(targetPos);
-        }
+            CinemachineVirtualCamera mainCamera = _sceneData.mainCamera;
+            Transform target = camera.target;
 
-        private void FlyMode(CameraComponent camera, InputAxisComponent inputAxis)
-        {
-            Vector3 targetPos = camera.lookTarget.position;
-            camera.transform.forward = Vector3.down;
-            camera.transform.position = new Vector3(targetPos.x, 15f, targetPos.z);
-        }
+            if (!target)
+            {
+                return;
+            }
 
-        private void FirstPersonMode(CameraComponent camera, InputAxisComponent inputAxis)
-        {
-            Quaternion rotateY = Quaternion.AngleAxis(inputAxis.axis.y, Vector3.right * sceneData.lookSensitivity * Time.deltaTime);
-            camera.transform.rotation = camera.lookTarget.rotation * rotateY;
-            camera.transform.position = camera.lookTarget.position;
+            switch (camera.mode)
+            {
+                case CameraMode.FirstPerson:
+                    {
+                        mainCamera.transform.position = target.position;
+                        mainCamera.transform.rotation = target.rotation;
+                        break;
+                    }
+
+                case CameraMode.ThirdPerson:
+                    {
+                        Vector3 newPosition = target.position - target.forward * 3f;
+
+                        mainCamera.transform.position = newPosition;
+                        mainCamera.transform.LookAt(target.position);
+
+                        break;
+                    }
+
+                case CameraMode.ThirdPersonFly:
+                    {
+                        Vector3 newPosition = target.position + target.up * 15f;
+                        mainCamera.transform.position = newPosition;
+                        mainCamera.transform.LookAt(target.position);
+                        break;
+                    }
+            }
+
         }
     }
 }

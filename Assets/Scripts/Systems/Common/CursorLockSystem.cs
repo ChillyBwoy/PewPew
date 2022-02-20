@@ -1,7 +1,7 @@
 using UnityEngine;
 using Leopotam.Ecs;
 
-namespace PewPew.Systems
+namespace PewPew.Systems.Common
 {
     sealed class CursorLockSystem : IEcsInitSystem
     {

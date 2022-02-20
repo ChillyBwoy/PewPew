@@ -1,37 +1,31 @@
 using UnityEngine;
 using Leopotam.Ecs;
-using PewPew.Components;
+using PewPew.Components.Input;
 using PewPew.UnityComponents;
 
-namespace PewPew.Systems
+namespace PewPew.Systems.Input
 {
     sealed class InputAxisSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private readonly EcsFilter<InputAxisComponent> filter = null;
-        private readonly GameControls gameControls = null;
-        private float axisX;
-        private float axisY;
+        private readonly EcsFilter<InputAxisComponent> _filter = null;
+        private readonly GameControls _gameControls = null;
+        private readonly StaticData _staticData = null;
+
+        private Vector2 _value;
 
         public void Init()
         {
-            Vector2 value = gameControls.Player.Look.ReadValue<Vector2>();
-            axisX = value.x;
-            axisY = value.y;
+            _value = _gameControls.Player.Rotation.ReadValue<Vector2>();
         }
 
         public void Run()
         {
-            Vector2 value = gameControls.Player.Look.ReadValue<Vector2>();
+            _value = _gameControls.Player.Rotation.ReadValue<Vector2>();
 
-            axisX += value.x;
-            axisY -= value.y;
-
-            foreach (var i in filter)
+            foreach (var i in _filter)
             {
-                ref InputAxisComponent axis = ref filter.Get1(i);
-
-                axis.axis.x = axisX;
-                axis.axis.y = Mathf.Clamp(axisY, -45, 45);
+                ref InputAxisComponent inputAxis = ref _filter.Get1(i);
+                inputAxis.value = _value.normalized * _staticData.lookSensitivity;
             }
         }
     }

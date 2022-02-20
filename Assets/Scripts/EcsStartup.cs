@@ -1,96 +1,145 @@
 using UnityEngine;
 using Leopotam.Ecs;
 
-using PewPew.Components;
+using PewPew.Components.Events;
 using PewPew.Systems;
+using PewPew.Systems.Camera;
+using PewPew.Systems.Common;
+using PewPew.Systems.Enemy;
+using PewPew.Systems.Input;
+using PewPew.Systems.Player;
 using PewPew.UnityComponents;
 
 namespace PewPew
 {
     sealed class EcsStartup : MonoBehaviour
     {
-        private EcsWorld world = null;
-        private EcsSystems initSystems = null;
-        private EcsSystems updateSystems = null;
-        private EcsSystems lateUpdateSystems = null;
-        private GameControls gameControls = null;
-        public SceneData sceneData;
+        private EcsWorld _world = null;
+        private EcsSystems _initSystems = null;
+        private EcsSystems _updateSystems = null;
+        private EcsSystems _fixedUpdateSystems = null;
+        private EcsSystems _lateUpdateSystems = null;
+        private GameControls _gameControls = null;
+        [SerializeField]
+        private SceneData _sceneData;
+        [SerializeField]
+        private StaticData _staticData;
+
+        private EcsSystems SpawnSystems()
+        {
+            var systems = new EcsSystems(_world);
+            systems
+                .Add(new PlayerSpawnSystem())
+                .Add(new EnemySpawnSystem());
+            return systems;
+        }
+
+        private EcsSystems PlayersSystems()
+        {
+            var systems = new EcsSystems(_world);
+            systems
+                .Add(new PlayerMoveSystem())
+                .Add(new PlayerRotationSystem())
+                .Add(new PlayerJumpSystem());
+            return systems;
+        }
+
+        private EcsSystems CameraSystems()
+        {
+            var systems = new EcsSystems(_world);
+            systems
+                .OneFrame<CameraChangeModeEvent>()
+                .Add(new CameraInitSystem())
+                .Add(new CameraInputSystem())
+                .Add(new CameraChangeModeSystem())
+                .Add(new CameraMoveSystem());
+            return systems;
+        }
 
         void Start()
         {
-            world = new EcsWorld();
-            initSystems = new EcsSystems(world);
-            updateSystems = new EcsSystems(world);
-            lateUpdateSystems = new EcsSystems(world);
-            gameControls = new GameControls();
+            _world = new EcsWorld();
+            _initSystems = new EcsSystems(_world);
+            _updateSystems = new EcsSystems(_world);
+            _fixedUpdateSystems = new EcsSystems(_world);
+            _lateUpdateSystems = new EcsSystems(_world);
+            _gameControls = new GameControls();
 
-            gameControls.Enable();
+            _gameControls.Enable();
 
 #if UNITY_EDITOR
-            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(world);
-            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(updateSystems);
+            Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
+            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_initSystems);
+            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_updateSystems);
+            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_fixedUpdateSystems);
 #endif
 
-            initSystems
+            _initSystems
                 .Add(new CursorLockSystem())
                 .Init();
 
-            updateSystems
-                .OneFrame<JumpEvent>()
-                .OneFrame<CameraChangeStateEvent>()
-                .OneFrame<ShootEvent>()
-                .Add(new PlayerInitSystem())
-                .Add(new CameraModeInputSystem())
-                .Add(new CameraChangeStateSystem())
-                .Add(new JumpBlockSystem())
-                .Add(new PlayerMovableInputSystem())
+            _updateSystems
+                .Add(SpawnSystems())
+                .Add(new SpawnSystem(_sceneData.prefabFactory))
                 .Add(new InputAxisSystem())
-                .Add(new PlayerMouseLookSystem())
-                .Add(new GroundCheckSystem())
-                .Add(new PlayerShootInputSystem())
-                .Add(new PlayerJumpInputSystem())
-                .Add(new JumpSystem())
-                .Add(new PlayerShootSystem())
-                .Add(new MovementSystem())
-                .Inject(gameControls)
-                .Inject(sceneData)
+                .Add(PlayersSystems())
+                .OneFrame<EnemySpawnEvent>()
+                .OneFrame<PlayerSpawnEvent>()
+                .Inject(_gameControls)
+                .Inject(_sceneData)
+                .Inject(_staticData)
                 .Init();
 
-            lateUpdateSystems
-                .Add(new CameraInitSystem())
-                .Add(new CameraMoveSystem())
-                .Add(new EnemyInitSystem())
-                .Add(new EnemyMovementSystem())
-                .Inject(gameControls)
-                .Inject(sceneData)
+            _fixedUpdateSystems
+                .Add(new MoveSystem())
+                .Add(new RotationSystem())
+                .Add(new VelocitySystem())
+                .Inject(_gameControls)
+                .Inject(_sceneData)
+                .Inject(_staticData)
+                .Init();
+
+            _lateUpdateSystems
+                .Add(CameraSystems())
+                .Inject(_gameControls)
+                .Inject(_sceneData)
+                .Inject(_staticData)
                 .Init();
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
-            lateUpdateSystems?.Run();
+            _fixedUpdateSystems?.Run();
         }
 
         private void Update()
         {
-            updateSystems?.Run();
+            _updateSystems?.Run();
+        }
+
+        private void LateUpdate()
+        {
+            _lateUpdateSystems?.Run();
         }
 
         void OnDestroy()
         {
-            gameControls?.Disable();
+            _gameControls?.Disable();
 
-            initSystems?.Destroy();
-            initSystems = null;
+            _initSystems?.Destroy();
+            _initSystems = null;
 
-            updateSystems?.Destroy();
-            updateSystems = null;
+            _updateSystems?.Destroy();
+            _updateSystems = null;
 
-            lateUpdateSystems?.Destroy();
-            lateUpdateSystems = null;
+            _fixedUpdateSystems?.Destroy();
+            _fixedUpdateSystems = null;
 
-            world.Destroy();
-            world = null;
+            _lateUpdateSystems?.Destroy();
+            _lateUpdateSystems = null;
+
+            _world.Destroy();
+            _world = null;
         }
     }
 }
