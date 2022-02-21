@@ -4,7 +4,7 @@ using PewPew.Components.Camera;
 using PewPew.Components.Events;
 using PewPew.UnityComponents;
 
-namespace PewPew.Systems.Input
+namespace PewPew.Systems.Camera
 {
     sealed class CameraInputSystem : IEcsRunSystem
     {

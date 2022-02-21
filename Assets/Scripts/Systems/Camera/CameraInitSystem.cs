@@ -1,5 +1,6 @@
 using Leopotam.Ecs;
 
+using PewPew.Components;
 using PewPew.Components.Camera;
 using PewPew.Components.Events;
 using PewPew.Components.Input;
@@ -18,9 +19,7 @@ namespace PewPew.Systems.Camera
         public void Init()
         {
             if (!_cameraFilter.IsEmpty())
-            {
                 return;
-            }
 
             EcsEntity entity = _world.NewEntity();
             ref CameraMountComponent cameraMount = ref _playerFilter.Get3(0);
@@ -31,6 +30,10 @@ namespace PewPew.Systems.Camera
                 target = cameraMount.transform
             };
             entity.Get<InputAxisComponent>();
+            entity.Get<RotationComponent>() = new RotationComponent
+            {
+                value = cameraMount.transform.rotation
+            };
         }
     }
 }

@@ -6,6 +6,7 @@ using PewPew.Components.Common;
 using PewPew.Components.Events;
 using PewPew.Components.Input;
 using PewPew.Components.Tags;
+using PewPew.Services;
 using PewPew.UnityComponents;
 
 namespace PewPew.Systems.Player
@@ -15,15 +16,13 @@ namespace PewPew.Systems.Player
         private readonly EcsWorld _world = null;
         private readonly StaticData _staticData = null;
         private readonly SceneData _sceneData = null;
-        private readonly EcsFilter<PlayerTag> _playerFilter = null;
+        private readonly RuntimeData _runtimeData = null;
 
         public void Init()
         {
             // check if there is already a player created
-            if (!_playerFilter.IsEmpty())
-            {
+            if (_runtimeData.PlayerEntity != null)
                 return;
-            }
 
             EcsEntity entity = _world.NewEntity();
 
@@ -43,6 +42,8 @@ namespace PewPew.Systems.Player
             entity.Get<VelocityComponent>() = new VelocityComponent { value = Vector3.zero };
             entity.Get<InputAxisComponent>();
             entity.Get<PlayerSpawnEvent>();
+
+            _runtimeData.PlayerEntity = entity;
         }
     }
 }

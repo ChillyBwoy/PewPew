@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StaticData
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2717092803341872063, guid: ae1d7bd5a670045b0936b7dabe4325f8, type: 3}
-  enemyPrefab: {fileID: 2717092803341872063, guid: d733a9a6f1cf04e1f954aebd127eaeda, type: 3}
+  enemyPrefab: {fileID: 2717092803341872063, guid: aa0ddb1c6359b44649f1fe906cd5d8f0, type: 3}
   playerSpeed: 10
-  lookSensitivity: 64
-  jumpForce: 5
+  lookSensitivity: 50
+  jumpForce: 8
   gravity: {x: 0, y: 9.81, z: 0}

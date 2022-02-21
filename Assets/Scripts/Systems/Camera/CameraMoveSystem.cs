@@ -2,6 +2,7 @@ using Cinemachine;
 using UnityEngine;
 using Leopotam.Ecs;
 
+using PewPew.Components;
 using PewPew.Components.Camera;
 using PewPew.Components.Input;
 using PewPew.UnityComponents;
@@ -42,8 +43,15 @@ namespace PewPew.Systems.Camera
             {
                 case CameraMode.FirstPerson:
                     {
+                        ref var rotation = ref entity.Get<RotationComponent>();
+
                         mainCamera.transform.position = target.position;
-                        mainCamera.transform.rotation = target.rotation;
+
+                        rotation.value.y -= inputAxis.value.y;
+                        rotation.value.y = Mathf.Clamp(rotation.value.y, -60f, 60f);
+
+                        mainCamera.transform.rotation = target.rotation * Quaternion.Euler(rotation.value.y, 0, 0);
+
                         break;
                     }
 

@@ -2,6 +2,7 @@ using UnityEngine;
 using Leopotam.Ecs;
 
 using PewPew.Components.Events;
+using PewPew.Services;
 using PewPew.Systems;
 using PewPew.Systems.Camera;
 using PewPew.Systems.Common;
@@ -20,6 +21,7 @@ namespace PewPew
         private EcsSystems _fixedUpdateSystems = null;
         private EcsSystems _lateUpdateSystems = null;
         private GameControls _gameControls = null;
+        private RuntimeData _runtimeData = null;
         [SerializeField]
         private SceneData _sceneData;
         [SerializeField]
@@ -38,9 +40,11 @@ namespace PewPew
         {
             var systems = new EcsSystems(_world);
             systems
+                .OneFrame<ShootEvent>()
                 .Add(new PlayerMoveSystem())
                 .Add(new PlayerRotationSystem())
-                .Add(new PlayerJumpSystem());
+                .Add(new PlayerJumpSystem())
+                .Add(new PlayerShootSystem());
             return systems;
         }
 
@@ -59,11 +63,12 @@ namespace PewPew
         void Start()
         {
             _world = new EcsWorld();
+            _runtimeData = new RuntimeData();
+            _gameControls = new GameControls();
             _initSystems = new EcsSystems(_world);
             _updateSystems = new EcsSystems(_world);
             _fixedUpdateSystems = new EcsSystems(_world);
             _lateUpdateSystems = new EcsSystems(_world);
-            _gameControls = new GameControls();
 
             _gameControls.Enable();
 
@@ -85,6 +90,7 @@ namespace PewPew
                 .Add(PlayersSystems())
                 .OneFrame<EnemySpawnEvent>()
                 .OneFrame<PlayerSpawnEvent>()
+                .Inject(_runtimeData)
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)
@@ -94,6 +100,7 @@ namespace PewPew
                 .Add(new MoveSystem())
                 .Add(new RotationSystem())
                 .Add(new VelocitySystem())
+                .Inject(_runtimeData)
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)
@@ -101,6 +108,7 @@ namespace PewPew
 
             _lateUpdateSystems
                 .Add(CameraSystems())
+                .Inject(_runtimeData)
                 .Inject(_gameControls)
                 .Inject(_sceneData)
                 .Inject(_staticData)

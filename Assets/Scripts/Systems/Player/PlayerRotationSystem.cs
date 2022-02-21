@@ -18,7 +18,7 @@ namespace PewPew.Systems.Player
                 ref RotationComponent rotation = ref _filter.Get2(i);
                 ref InputAxisComponent axis = ref _filter.Get3(i);
 
-                float yRotation = rotation.value.y + axis.value.x * Time.deltaTime;
+                float yRotation = rotation.value.y + axis.value.x;
                 rotation.value = Quaternion.Euler(0, yRotation, 0);
             }
         }
