@@ -2,10 +2,10 @@ using Leopotam.Ecs;
 
 namespace PewPew.Lib.MonoLink
 {
-    public class MonoEntity : MonoLinkBase
+    public abstract class MonoEntity : MonoLinkBase
     {
-        private EcsEntity _entity;
-        private MonoLinkBase[] _monoLinks;
+        protected EcsEntity _entity;
+        protected MonoLinkBase[] _monoLinks;
 
         public MonoLink<T> Get<T>() where T : struct
         {

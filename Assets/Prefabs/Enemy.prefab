@@ -41,10 +41,10 @@ GameObject:
   - component: {fileID: 2717092803341872062}
   - component: {fileID: 2717092803341872056}
   - component: {fileID: 2717092803341872057}
-  - component: {fileID: 2717092803341872058}
-  - component: {fileID: 2717092803341872059}
-  - component: {fileID: 126239259498996172}
-  - component: {fileID: 5554307614516296852}
+  - component: {fileID: 9091021059521754411}
+  - component: {fileID: 8757094087813176305}
+  - component: {fileID: 3496274073553494888}
+  - component: {fileID: 3296764865395353847}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -99,7 +99,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2717092803341872058
+--- !u!114 &9091021059521754411
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,10 +108,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2717092803341872063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a8d95b76354e4489a224f37ffb7311b, type: 3}
+  m_Script: {fileID: 11500000, guid: 023491388097747919900c24daa4a206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2717092803341872059
+--- !u!114 &8757094087813176305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53470615866254c31bc4b796aeabe7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &126239259498996172
+--- !u!114 &3496274073553494888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   properties:
     collider: {fileID: 2717092803341872057}
     rigidbody: {fileID: 2717092803341872056}
---- !u!114 &5554307614516296852
+--- !u!114 &3296764865395353847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

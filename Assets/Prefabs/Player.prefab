@@ -41,10 +41,10 @@ GameObject:
   - component: {fileID: 2717092803341872062}
   - component: {fileID: 2717092803341872056}
   - component: {fileID: 2717092803341872057}
-  - component: {fileID: 2717092803341872058}
-  - component: {fileID: 2717092803341872059}
-  - component: {fileID: 126239259498996172}
-  - component: {fileID: 5554307614516296852}
+  - component: {fileID: 2603353997229096294}
+  - component: {fileID: 3276172241453052299}
+  - component: {fileID: 4486316058960170438}
+  - component: {fileID: 4598476399525761040}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -100,7 +100,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2717092803341872058
+--- !u!114 &2603353997229096294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,10 +109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2717092803341872063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a8d95b76354e4489a224f37ffb7311b, type: 3}
+  m_Script: {fileID: 11500000, guid: d6a720da0fe7741f09a37107ee254bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2717092803341872059
+--- !u!114 &3276172241453052299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53470615866254c31bc4b796aeabe7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &126239259498996172
+--- !u!114 &4486316058960170438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   properties:
     collider: {fileID: 2717092803341872057}
     rigidbody: {fileID: 2717092803341872056}
---- !u!114 &5554307614516296852
+--- !u!114 &4598476399525761040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
