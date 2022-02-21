@@ -1,3 +1,4 @@
+using UnityEngine;
 using Leopotam.Ecs;
 
 namespace PewPew.Lib.MonoLink
@@ -7,7 +8,7 @@ namespace PewPew.Lib.MonoLink
         protected EcsEntity _entity;
         protected MonoLinkBase[] _monoLinks;
 
-        public MonoLink<T> Get<T>() where T : struct
+        public MonoLink<T> GetMonoLink<T>() where T : struct
         {
             foreach (MonoLinkBase link in _monoLinks)
             {
@@ -18,6 +19,11 @@ namespace PewPew.Lib.MonoLink
             }
 
             return null;
+        }
+
+        public bool Has<T>() where T : struct
+        {
+            return _entity.Has<T>();
         }
 
         public override void Make(ref EcsEntity entity)
@@ -32,6 +38,14 @@ namespace PewPew.Lib.MonoLink
                     continue;
                 }
                 monoLink.Make(ref entity);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_entity.IsAlive())
+            {
+                _entity.Destroy();
             }
         }
     }

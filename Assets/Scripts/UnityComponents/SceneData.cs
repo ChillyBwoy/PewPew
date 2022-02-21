@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -20,5 +21,8 @@ namespace PewPew.UnityComponents
         [Header("Camera")]
         public CinemachineVirtualCamera mainCamera;
         public CameraMode cameraMode;
+
+        [Header("Power Ups")]
+        public WeaponData[] weapons;
     }
 }

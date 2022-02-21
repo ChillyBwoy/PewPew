@@ -9,6 +9,7 @@ using PewPew.Systems.Common;
 using PewPew.Systems.Enemy;
 using PewPew.Systems.Input;
 using PewPew.Systems.Player;
+using PewPew.Systems.Weapon;
 using PewPew.UnityComponents;
 
 namespace PewPew
@@ -32,7 +33,8 @@ namespace PewPew
             var systems = new EcsSystems(_world);
             systems
                 .Add(new PlayerSpawnSystem())
-                .Add(new EnemySpawnSystem());
+                .Add(new EnemySpawnSystem())
+                .Add(new WeaponSpawnSystem());
             return systems;
         }
 
@@ -90,6 +92,7 @@ namespace PewPew
                 .Add(PlayersSystems())
                 .OneFrame<EnemySpawnEvent>()
                 .OneFrame<PlayerSpawnEvent>()
+                .OneFrame<WeaponSpawnEvent>()
                 .Inject(_runtimeData)
                 .Inject(_gameControls)
                 .Inject(_sceneData)
