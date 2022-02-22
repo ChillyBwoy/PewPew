@@ -48,7 +48,6 @@ namespace PewPew.Systems.Weapon
                 parent = null,
             };
             entity.Get<WeaponTag>();
-            entity.Get<PowerUpTag>();
             entity.Get<RotationComponent>() = new RotationComponent { value = weaponData.transform.rotation };
             entity.Get<InputAxisComponent>();
         }

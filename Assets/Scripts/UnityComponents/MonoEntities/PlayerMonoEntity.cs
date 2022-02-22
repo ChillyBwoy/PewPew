@@ -1,7 +1,7 @@
 using UnityEngine;
 using Leopotam.Ecs;
 
-using PewPew.Components.Tags;
+using PewPew.Components;
 using PewPew.Lib.MonoLink;
 
 namespace PewPew.UnityComponents.MonoEntities
@@ -16,7 +16,7 @@ namespace PewPew.UnityComponents.MonoEntities
                 return;
             }
 
-            if (entity.Has<PowerUpTag>())
+            if (entity.Has<PowerUpComponent>())
             {
                 Destroy(other.gameObject);
             }
