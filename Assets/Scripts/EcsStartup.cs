@@ -9,7 +9,7 @@ using PewPew.Systems.Common;
 using PewPew.Systems.Enemy;
 using PewPew.Systems.Input;
 using PewPew.Systems.Player;
-using PewPew.Systems.Weapon;
+using PewPew.Systems.PowerUps;
 using PewPew.UnityComponents;
 
 namespace PewPew
@@ -34,18 +34,18 @@ namespace PewPew
             systems
                 .Add(new PlayerSpawnSystem())
                 .Add(new EnemySpawnSystem())
-                .Add(new WeaponSpawnSystem());
+                .Add(new PowerUpSpawnSystem());
             return systems;
         }
 
-        private EcsSystems PlayersSystems()
+        private EcsSystems PlayerSystems()
         {
             var systems = new EcsSystems(_world);
             systems
-                .OneFrame<ShootEvent>()
                 .Add(new PlayerMoveSystem())
                 .Add(new PlayerRotationSystem())
                 .Add(new PlayerJumpSystem())
+                .Add(new PlayerPowerUpPickSystem())
                 .Add(new PlayerShootSystem());
             return systems;
         }
@@ -89,10 +89,12 @@ namespace PewPew
                 .Add(SpawnSystems())
                 .Add(new SpawnSystem(_sceneData.prefabFactory))
                 .Add(new InputAxisSystem())
-                .Add(PlayersSystems())
+                .Add(PlayerSystems())
                 .OneFrame<EnemySpawnEvent>()
                 .OneFrame<PlayerSpawnEvent>()
-                .OneFrame<WeaponSpawnEvent>()
+                .OneFrame<PowerUpSpawnEvent>()
+                .OneFrame<ShootEvent>()
+                .OneFrame<PowerUpPickUpEvent>()
                 .Inject(_runtimeData)
                 .Inject(_gameControls)
                 .Inject(_sceneData)

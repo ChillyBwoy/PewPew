@@ -1,5 +1,3 @@
-using System.Linq;
-using UnityEngine;
 using Leopotam.Ecs;
 
 using PewPew.Components;
@@ -9,14 +7,14 @@ using PewPew.Components.Input;
 using PewPew.Components.Tags;
 using PewPew.UnityComponents;
 
-namespace PewPew.Systems.Weapon
+namespace PewPew.Systems.PowerUps
 {
-    sealed class WeaponSpawnSystem : IEcsInitSystem, IEcsRunSystem
+    sealed class PowerUpSpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsWorld _world = null;
         private readonly StaticData _staticData = null;
         private readonly SceneData _sceneData = null;
-        private readonly EcsFilter<WeaponSpawnEvent> _filter = null;
+        private readonly EcsFilter<PowerUpSpawnEvent> _filter = null;
         private int _nextIndex = 0;
         private int nextIndex
         {
@@ -25,7 +23,7 @@ namespace PewPew.Systems.Weapon
                 int index = _nextIndex;
                 _nextIndex++;
 
-                if (_nextIndex >= _sceneData.weapons.Length)
+                if (_nextIndex >= _sceneData.powerUps.Length)
                 {
                     _nextIndex = 0;
                 }
@@ -36,25 +34,24 @@ namespace PewPew.Systems.Weapon
 
         private void InitializeAt(int index)
         {
-            WeaponData weaponData = _sceneData.weapons[index];
+            PowerUpData powerUpData = _sceneData.powerUps[index];
 
             EcsEntity entity = _world.NewEntity();
 
             entity.Get<SpawnComponent>() = new SpawnComponent
             {
-                prefab = weaponData.weaponPrefab,
-                position = weaponData.transform.position,
-                rotation = weaponData.transform.rotation,
+                prefab = powerUpData.prefab,
+                position = powerUpData.transform.position,
+                rotation = powerUpData.transform.rotation,
                 parent = null,
             };
-            entity.Get<WeaponTag>();
-            entity.Get<RotationComponent>() = new RotationComponent { value = weaponData.transform.rotation };
+            entity.Get<RotationComponent>() = new RotationComponent { value = powerUpData.transform.rotation };
             entity.Get<InputAxisComponent>();
         }
 
         public void Init()
         {
-            for (int i = 0; i < _sceneData.weapons.Length; i++)
+            for (int i = 0; i < _sceneData.powerUps.Length; i++)
             {
                 InitializeAt(i);
             }

@@ -327,10 +327,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 252891281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1bb744b8622447b48febe7113aeb75d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b0a42b49440c4f949ce9934cb513b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 3289866617688911545, guid: dff5368d3432d4ceb8e943af26d41353, type: 3}
+  prefab: {fileID: 3289866617688911545, guid: dff5368d3432d4ceb8e943af26d41353, type: 3}
 --- !u!1 &259391046
 GameObject:
   m_ObjectHideFlags: 0
@@ -4470,7 +4470,7 @@ MonoBehaviour:
   - {fileID: 722887017}
   mainCamera: {fileID: 259391047}
   cameraMode: 0
-  weapons:
+  powerUps:
   - {fileID: 252891283}
 --- !u!114 &1141077092
 MonoBehaviour:

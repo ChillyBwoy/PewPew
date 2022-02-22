@@ -1,12 +1,16 @@
-using UnityEngine;
 using Leopotam.Ecs;
 
 namespace PewPew.Lib.MonoLink
 {
     public abstract class MonoEntity : MonoLinkBase
     {
-        protected EcsEntity _entity;
-        protected MonoLinkBase[] _monoLinks;
+        private EcsEntity _entity;
+        private MonoLinkBase[] _monoLinks;
+
+        public EcsEntity entity
+        {
+            get => _entity;
+        }
 
         public MonoLink<T> GetMonoLink<T>() where T : struct
         {

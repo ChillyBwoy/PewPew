@@ -8,7 +8,6 @@ namespace PewPew.Systems.Player
 {
     sealed class PlayerShootSystem : IEcsRunSystem
     {
-        private readonly EcsWorld _world = null;
         private readonly EcsFilter<PlayerTag> _filter = null;
         private readonly GameControls _gameControls = null;
 
