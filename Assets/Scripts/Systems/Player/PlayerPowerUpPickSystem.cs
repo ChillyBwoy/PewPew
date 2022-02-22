@@ -2,6 +2,7 @@ using UnityEngine;
 using Leopotam.Ecs;
 
 using PewPew.Components;
+using PewPew.Components.Common;
 using PewPew.Components.Events;
 using PewPew.Components.Tags;
 
@@ -9,7 +10,7 @@ namespace PewPew.Systems.Player
 {
     sealed class PlayerPowerUpPickSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag, PowerUpPickUpEvent, MountingComponent> _filter = null;
+        private readonly EcsFilter<PlayerTag, PowerUpPickUpEvent, HandsComponent> _filter = null;
         public void Run()
         {
             if (_filter.IsEmpty())
@@ -20,11 +21,23 @@ namespace PewPew.Systems.Player
             foreach (int i in _filter)
             {
                 ref PowerUpPickUpEvent powerUpPickUp = ref _filter.Get2(i);
-                ref MountingComponent mounting = ref _filter.Get3(i);
-
-                // mounting.mountingPoint
+                ref HandsComponent hands = ref _filter.Get3(i);
 
                 EcsEntity targetEntity = powerUpPickUp.targetEntity;
+                if (!targetEntity.Has<GameObjectComponent>())
+                {
+                    continue;
+                }
+
+                ref GameObjectComponent targetGameObject = ref targetEntity.Get<GameObjectComponent>();
+
+                var rb = targetGameObject.value.GetComponent<Rigidbody>();
+                rb.isKinematic = true;
+                // rb.detectCollisions = false;
+
+                targetGameObject.value.transform.SetParent(hands.rightHand);
+                targetGameObject.value.transform.localPosition = Vector3.zero;
+                targetGameObject.value.transform.localRotation = Quaternion.identity;
             }
         }
     }

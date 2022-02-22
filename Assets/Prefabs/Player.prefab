@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &211538054397384367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6329523133913500694}
+  m_Layer: 0
+  m_Name: LeftHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6329523133913500694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211538054397384367}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.4, y: 1.2, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2717092803341872062}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &234494353048088461
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +75,7 @@ GameObject:
   - component: {fileID: 3276172241453052299}
   - component: {fileID: 4486316058960170438}
   - component: {fileID: 4598476399525761040}
-  - component: {fileID: 3112899594071542313}
+  - component: {fileID: 3742393054827438185}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -68,6 +98,7 @@ Transform:
   - {fileID: 4304456031812217068}
   - {fileID: 1638455195486247999}
   - {fileID: 4254755504112516805}
+  - {fileID: 6329523133913500694}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -154,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   properties:
     transform: {fileID: 1638455195486247999}
---- !u!114 &3112899594071542313
+--- !u!114 &3742393054827438185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,11 +194,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2717092803341872063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a09979be8db417db80b5c21a7b8100, type: 3}
+  m_Script: {fileID: 11500000, guid: 06f1746819f774531ad6bd763f363eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   properties:
-    mountingPoint: {fileID: 4254755504112516805}
+    leftHand: {fileID: 6329523133913500694}
+    rightHand: {fileID: 4254755504112516805}
 --- !u!1 &2717092803586251192
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,9 +372,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4254755504112516805}
   m_Layer: 0
-  m_Name: Arm
+  m_Name: RightHand
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -354,7 +386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5586422181208792782}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.404, y: 1.297, z: 0.232}
+  m_LocalPosition: {x: 0.4, y: 1.2, z: 0.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2717092803341872062}

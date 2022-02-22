@@ -3,7 +3,7 @@ using PewPew.Lib.MonoLink;
 
 namespace PewPew.UnityComponents.MonoLinks
 {
-    public class MountingMonoLink : MonoLink<MountingComponent>
+    public class HandsMonoLink : MonoLink<HandsComponent>
     {
 
     }
