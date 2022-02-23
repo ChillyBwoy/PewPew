@@ -7,7 +7,7 @@ using PewPew.Components.Tags;
 
 namespace PewPew.Systems.Player
 {
-    sealed class PlayerHandsComponent : IEcsRunSystem
+    sealed class PlayerHandsSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PlayerTag, InputAxisComponent, HandsComponent> _filter = null;
 
@@ -26,8 +26,8 @@ namespace PewPew.Systems.Player
                 ref InputAxisComponent inputAxis = ref _filter.Get2(i);
                 ref HandsComponent hands = ref _filter.Get3(i);
 
-                ApplyVerticalRotation(inputAxis.value, hands.rightHand.transform);
-                ApplyVerticalRotation(inputAxis.value, hands.leftHand.transform);
+                ApplyVerticalRotation(inputAxis.value, hands.rightShoulder.transform);
+                ApplyVerticalRotation(inputAxis.value, hands.leftShoulder.transform);
             }
         }
     }

@@ -44,7 +44,7 @@ namespace PewPew
             systems
                 .Add(new PlayerMoveSystem())
                 .Add(new PlayerRotationSystem())
-                .Add(new PlayerHandsComponent())
+                .Add(new PlayerHandsSystem())
                 .Add(new PlayerJumpSystem())
                 .Add(new PlayerPowerUpPickSystem())
                 .Add(new PlayerShootSystem());

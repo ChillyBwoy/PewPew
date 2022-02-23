@@ -6,7 +6,12 @@ namespace PewPew.Components
     [Serializable]
     public struct HandsComponent
     {
-        public Transform leftHand;
+        [Header("Right")]
+        public Transform rightShoulder;
         public Transform rightHand;
+
+        [Header("Left")]
+        public Transform leftShoulder;
+        public Transform leftHand;
     }
 }

@@ -33,7 +33,6 @@ namespace PewPew.Systems.Player
 
                 var rb = targetGameObject.value.GetComponent<Rigidbody>();
                 rb.isKinematic = true;
-                // rb.detectCollisions = false;
 
                 targetGameObject.value.transform.SetParent(hands.rightHand);
                 targetGameObject.value.transform.localPosition = Vector3.zero;
