@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 9122933989655572965}
   - component: {fileID: 7068549900574948762}
   - component: {fileID: 8055110353687086601}
-  - component: {fileID: 3923420326599664810}
+  - component: {fileID: -6421636879510551775}
   - component: {fileID: 3333165713855681921}
-  - component: {fileID: 999980768860200141}
+  - component: {fileID: 4546124781583890521}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -150,7 +150,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1960816, z: 0.87412477}
   m_Center: {x: 0, y: -0.041256823, z: 0.31679636}
---- !u!114 &3923420326599664810
+--- !u!114 &-6421636879510551775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3289866617688911545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5b599cb74c7b4748b1ac42993b243d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b94f7ff55baa4d8f929c4a09291963b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3333165713855681921
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53470615866254c31bc4b796aeabe7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &999980768860200141
+--- !u!114 &4546124781583890521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3289866617688911545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d933e85166244b34b2020386fedad6f, type: 3}
+  m_Script: {fileID: 11500000, guid: fdf387fa793d54d53983e19a7a69e5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   properties:

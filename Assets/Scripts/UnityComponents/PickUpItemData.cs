@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace PewPew.UnityComponents
 {
-    public class PowerUpData : MonoBehaviour
+    public class PickUpItemData : MonoBehaviour
     {
         public GameObject prefab;
     }

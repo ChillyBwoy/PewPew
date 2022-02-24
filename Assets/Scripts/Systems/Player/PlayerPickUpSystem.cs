@@ -8,7 +8,7 @@ using PewPew.Components.Tags;
 
 namespace PewPew.Systems.Player
 {
-    sealed class PlayerPowerUpPickSystem : IEcsRunSystem
+    sealed class PlayerPickUpSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PlayerTag, PowerUpPickUpEvent, HandsComponent> _filter = null;
         public void Run()

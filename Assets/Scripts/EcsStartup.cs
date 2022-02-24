@@ -9,7 +9,7 @@ using PewPew.Systems.Common;
 using PewPew.Systems.Enemy;
 using PewPew.Systems.Input;
 using PewPew.Systems.Player;
-using PewPew.Systems.PowerUps;
+using PewPew.Systems.PickUpItem;
 using PewPew.UnityComponents;
 
 namespace PewPew
@@ -34,7 +34,7 @@ namespace PewPew
             systems
                 .Add(new PlayerSpawnSystem())
                 .Add(new EnemySpawnSystem())
-                .Add(new PowerUpSpawnSystem());
+                .Add(new PickUpItemSpawnSystem());
             return systems;
         }
 
@@ -46,7 +46,7 @@ namespace PewPew
                 .Add(new PlayerRotationSystem())
                 .Add(new PlayerHandsSystem())
                 .Add(new PlayerJumpSystem())
-                .Add(new PlayerPowerUpPickSystem())
+                .Add(new PlayerPickUpSystem())
                 .Add(new PlayerShootSystem());
             return systems;
         }

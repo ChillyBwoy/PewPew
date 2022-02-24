@@ -4,12 +4,11 @@ using PewPew.Components;
 using PewPew.Components.Common;
 using PewPew.Components.Events;
 using PewPew.Components.Input;
-using PewPew.Components.Tags;
 using PewPew.UnityComponents;
 
-namespace PewPew.Systems.PowerUps
+namespace PewPew.Systems.PickUpItem
 {
-    sealed class PowerUpSpawnSystem : IEcsInitSystem, IEcsRunSystem
+    sealed class PickUpItemSpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsWorld _world = null;
         private readonly StaticData _staticData = null;
@@ -23,7 +22,7 @@ namespace PewPew.Systems.PowerUps
                 int index = _nextIndex;
                 _nextIndex++;
 
-                if (_nextIndex >= _sceneData.powerUps.Length)
+                if (_nextIndex >= _sceneData.pickUpItems.Length)
                 {
                     _nextIndex = 0;
                 }
@@ -34,24 +33,24 @@ namespace PewPew.Systems.PowerUps
 
         private void InitializeAt(int index)
         {
-            PowerUpData powerUpData = _sceneData.powerUps[index];
+            PickUpItemData pickUpItemData = _sceneData.pickUpItems[index];
 
             EcsEntity entity = _world.NewEntity();
 
             entity.Get<SpawnComponent>() = new SpawnComponent
             {
-                prefab = powerUpData.prefab,
-                position = powerUpData.transform.position,
-                rotation = powerUpData.transform.rotation,
+                prefab = pickUpItemData.prefab,
+                position = pickUpItemData.transform.position,
+                rotation = pickUpItemData.transform.rotation,
                 parent = null,
             };
-            entity.Get<RotationComponent>() = new RotationComponent { value = powerUpData.transform.rotation };
+            entity.Get<RotationComponent>() = new RotationComponent { value = pickUpItemData.transform.rotation };
             entity.Get<InputAxisComponent>();
         }
 
         public void Init()
         {
-            for (int i = 0; i < _sceneData.powerUps.Length; i++)
+            for (int i = 0; i < _sceneData.pickUpItems.Length; i++)
             {
                 InitializeAt(i);
             }

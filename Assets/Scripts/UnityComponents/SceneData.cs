@@ -22,6 +22,6 @@ namespace PewPew.UnityComponents
         public CameraMode cameraMode;
 
         [Header("Power Ups")]
-        public PowerUpData[] powerUps;
+        public PickUpItemData[] pickUpItems;
     }
 }

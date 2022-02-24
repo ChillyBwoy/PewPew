@@ -2,14 +2,14 @@ using System;
 
 namespace PewPew.Components
 {
-    public enum PowerUpType
+    public enum PickUpItemType
     {
         Weapon
     }
 
     [Serializable]
-    public struct PowerUpComponent
+    public struct PickUpItemComponent
     {
-        public PowerUpType type;
+        public PickUpItemType type;
     }
 }

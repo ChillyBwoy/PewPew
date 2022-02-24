@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 252891282}
   - component: {fileID: 252891283}
+  - component: {fileID: 252891284}
   m_Layer: 0
   m_Name: WeaponSpawnPotint_1
   m_TagString: Untagged
@@ -164,6 +165,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0a42b49440c4f949ce9934cb513b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3289866617688911545, guid: dff5368d3432d4ceb8e943af26d41353, type: 3}
+--- !u!114 &252891284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252891281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d61897f1e7a42e685dcb05482aa156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3289866617688911545, guid: dff5368d3432d4ceb8e943af26d41353, type: 3}
@@ -4306,8 +4320,8 @@ MonoBehaviour:
   - {fileID: 722887017}
   mainCamera: {fileID: 259391047}
   cameraMode: 0
-  powerUps:
-  - {fileID: 252891283}
+  pickUpItems:
+  - {fileID: 252891284}
 --- !u!114 &1141077092
 MonoBehaviour:
   m_ObjectHideFlags: 0
