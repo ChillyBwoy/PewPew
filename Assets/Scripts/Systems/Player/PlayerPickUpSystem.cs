@@ -10,7 +10,7 @@ namespace PewPew.Systems.Player
 {
     sealed class PlayerPickUpSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<PlayerTag, PowerUpPickUpEvent, HandsComponent> _filter = null;
+        private readonly EcsFilter<PlayerTag, PickUpEvent, HandsComponent> _filter = null;
         public void Run()
         {
             if (_filter.IsEmpty())
@@ -20,7 +20,7 @@ namespace PewPew.Systems.Player
 
             foreach (int i in _filter)
             {
-                ref PowerUpPickUpEvent powerUpPickUp = ref _filter.Get2(i);
+                ref PickUpEvent powerUpPickUp = ref _filter.Get2(i);
                 ref HandsComponent hands = ref _filter.Get3(i);
 
                 EcsEntity targetEntity = powerUpPickUp.targetEntity;
@@ -33,6 +33,7 @@ namespace PewPew.Systems.Player
 
                 var rb = targetGameObject.value.GetComponent<Rigidbody>();
                 rb.isKinematic = true;
+                rb.useGravity = false;
 
                 targetGameObject.value.transform.SetParent(hands.rightHand);
                 targetGameObject.value.transform.localPosition = Vector3.zero;

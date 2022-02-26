@@ -19,7 +19,7 @@ namespace PewPew.Systems.Player
             foreach (int i in _filter)
             {
                 EcsEntity entity = _filter.GetEntity(i);
-                entity.Get<ShootEvent>();
+                // entity.Get<ShootEvent>() = туц ;
             }
         }
     }

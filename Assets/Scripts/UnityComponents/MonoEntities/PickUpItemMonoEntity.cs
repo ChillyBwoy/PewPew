@@ -20,7 +20,7 @@ namespace PewPew.UnityComponents.MonoEntities
 
             if (otherEntity.Has<CharacterComponent>())
             {
-                otherEntity.entity.Get<PowerUpPickUpEvent>() = new PowerUpPickUpEvent
+                otherEntity.entity.Get<PickUpEvent>() = new PickUpEvent
                 {
                     targetEntity = entity
                 };

@@ -2,7 +2,7 @@ using Leopotam.Ecs;
 
 namespace PewPew.Components.Events
 {
-    public struct PowerUpPickUpEvent
+    public struct PickUpEvent
     {
         public EcsEntity targetEntity;
     }

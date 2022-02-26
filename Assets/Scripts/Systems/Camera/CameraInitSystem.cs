@@ -14,7 +14,7 @@ namespace PewPew.Systems.Camera
         private readonly EcsWorld _world = null;
         private readonly SceneData _sceneData = null;
         private readonly EcsFilter<CameraComponent> _cameraFilter = null;
-        private readonly EcsFilter<PlayerTag, PlayerSpawnEvent, CameraMountComponent> _playerFilter = null;
+        private readonly EcsFilter<PlayerTag, CameraMountComponent> _playerFilter = null;
 
         public void Init()
         {
@@ -22,7 +22,8 @@ namespace PewPew.Systems.Camera
                 return;
 
             EcsEntity entity = _world.NewEntity();
-            ref CameraMountComponent cameraMount = ref _playerFilter.Get3(0);
+            // TODO: refactor
+            ref CameraMountComponent cameraMount = ref _playerFilter.Get2(0);
 
             entity.Get<CameraComponent>() = new CameraComponent
             {
@@ -30,6 +31,7 @@ namespace PewPew.Systems.Camera
                 target = cameraMount.transform
             };
             entity.Get<InputAxisComponent>();
+            entity.Get<PlayerCameraTag>();
             entity.Get<RotationComponent>() = new RotationComponent
             {
                 value = cameraMount.transform.rotation
