@@ -13,7 +13,7 @@ namespace PewPew.Systems.PickUpItem
         private readonly EcsWorld _world = null;
         private readonly StaticData _staticData = null;
         private readonly SceneData _sceneData = null;
-        private readonly EcsFilter<PowerUpSpawnEvent> _filter = null;
+        private readonly EcsFilter<PickUpItemSpawnEvent> _filter = null;
         private int _nextIndex = 0;
         private int nextIndex
         {

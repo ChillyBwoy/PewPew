@@ -40,7 +40,6 @@ namespace PewPew.Systems.Enemy
                 parent = null,
             };
             entity.Get<EnemyTag>();
-            entity.Get<CameraTargetTag>();
             entity.Get<DirectionComponent>() = new DirectionComponent { value = Vector3.zero };
             entity.Get<RotationComponent>() = new RotationComponent { value = spawnPoint.rotation };
             entity.Get<VelocityComponent>() = new VelocityComponent { value = Vector3.zero };

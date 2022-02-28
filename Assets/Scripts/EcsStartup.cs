@@ -2,6 +2,7 @@ using UnityEngine;
 using Leopotam.Ecs;
 
 using PewPew.Components.Events;
+using PewPew.Components.Tags;
 using PewPew.Services;
 using PewPew.Systems;
 using PewPew.Systems.Camera;
@@ -55,11 +56,13 @@ namespace PewPew
         {
             var systems = new EcsSystems(_world);
             systems
-                .OneFrame<CameraChangeModeEvent>()
                 .Add(new CameraInitSystem())
+                .Add(new CameraUpdateTargetSystem())
                 .Add(new CameraInputSystem())
                 .Add(new CameraChangeModeSystem())
-                .Add(new CameraMoveSystem());
+                .Add(new CameraMoveSystem())
+                .OneFrame<CameraChangeModeEvent>()
+                .OneFrame<CameraTargetTag>();
             return systems;
         }
 
@@ -92,8 +95,7 @@ namespace PewPew
                 .Add(new InputAxisSystem())
                 .Add(PlayerSystems())
                 .OneFrame<EnemySpawnEvent>()
-                .OneFrame<PlayerSpawnEvent>()
-                .OneFrame<PowerUpSpawnEvent>()
+                .OneFrame<PickUpItemSpawnEvent>()
                 .OneFrame<ShootEvent>()
                 .OneFrame<PickUpEvent>()
                 .Inject(_runtimeData)

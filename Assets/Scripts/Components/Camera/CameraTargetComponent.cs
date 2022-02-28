@@ -4,8 +4,8 @@ using UnityEngine;
 namespace PewPew.Components.Camera
 {
     [Serializable]
-    public struct CameraMountComponent
+    public struct CameraTargetComponent
     {
-        public Transform transform;
+        public Transform target;
     }
 }

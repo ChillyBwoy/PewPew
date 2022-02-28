@@ -1,5 +1,5 @@
-using UnityEngine;
 using Cinemachine;
+using UnityEngine;
 
 using PewPew.Components.Camera;
 using PewPew.Lib.Factories;

@@ -11,7 +11,7 @@ namespace PewPew.Systems.Camera
 {
     sealed class CameraMoveSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<CameraComponent, InputAxisComponent, RotationComponent> _cameraFilter = null;
+        private readonly EcsFilter<CameraComponent, InputAxisComponent, RotationComponent, CameraTargetComponent> _cameraFilter = null;
         private readonly SceneData _sceneData = null;
 
         public void Run()
@@ -26,8 +26,9 @@ namespace PewPew.Systems.Camera
                 ref CameraComponent camera = ref _cameraFilter.Get1(i);
                 ref InputAxisComponent inputAxis = ref _cameraFilter.Get2(i);
                 ref RotationComponent rotation = ref _cameraFilter.Get3(i);
+                ref CameraTargetComponent cameraTarget = ref _cameraFilter.Get4(i);
 
-                Transform target = camera.target;
+                Transform target = cameraTarget.target;
 
                 switch (camera.mode)
                 {

@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638455195486247999}
   m_Layer: 0
-  m_Name: CameraMount
+  m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -106,8 +106,8 @@ GameObject:
   - component: {fileID: 2603353997229096294}
   - component: {fileID: 3276172241453052299}
   - component: {fileID: 4486316058960170438}
-  - component: {fileID: 4598476399525761040}
   - component: {fileID: 3742393054827438185}
+  - component: {fileID: 3916554879211042720}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -203,20 +203,6 @@ MonoBehaviour:
   properties:
     collider: {fileID: 2717092803341872057}
     rigidbody: {fileID: 2717092803341872056}
---- !u!114 &4598476399525761040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2717092803341872063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eee7c624c1cb431cb5250859b488b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  properties:
-    transform: {fileID: 1638455195486247999}
 --- !u!114 &3742393054827438185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +220,20 @@ MonoBehaviour:
     rightHand: {fileID: 8859055954007009473}
     leftShoulder: {fileID: 946885142950985171}
     leftHand: {fileID: 5232934084318953790}
+--- !u!114 &3916554879211042720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717092803341872063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872ffba5d9edd40879d0b70a53c91bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  properties:
+    target: {fileID: 1638455195486247999}
 --- !u!1 &2717092803586251192
 GameObject:
   m_ObjectHideFlags: 0

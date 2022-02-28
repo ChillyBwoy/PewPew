@@ -3,7 +3,6 @@ using Leopotam.Ecs;
 
 using PewPew.Components;
 using PewPew.Components.Common;
-using PewPew.Components.Events;
 using PewPew.Components.Input;
 using PewPew.Components.Tags;
 using PewPew.Services;
@@ -36,12 +35,11 @@ namespace PewPew.Systems.Player
                 parent = null,
             };
             entity.Get<PlayerTag>();
-            entity.Get<CameraTargetTag>();
             entity.Get<DirectionComponent>() = new DirectionComponent { value = Vector3.zero };
             entity.Get<RotationComponent>() = new RotationComponent { value = spawnPoint.rotation };
             entity.Get<VelocityComponent>() = new VelocityComponent { value = Vector3.zero };
             entity.Get<InputAxisComponent>();
-            entity.Get<PlayerSpawnEvent>();
+            entity.Get<CameraTargetTag>();
 
             _runtimeData.PlayerEntity = entity;
         }

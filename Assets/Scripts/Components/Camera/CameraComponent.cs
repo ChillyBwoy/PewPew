@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 
 namespace PewPew.Components.Camera
@@ -14,6 +15,5 @@ namespace PewPew.Components.Camera
     public struct CameraComponent
     {
         public CameraMode mode;
-        public Transform target;
     }
 }
