@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
-namespace PewPew.Components.Events
+namespace PewPew.Components
 {
-    public struct ShootEvent
+    [Serializable]
+    public struct ProjectileSpawnerComponent
     {
         public GameObject prefab;
         public Transform spawnPoint;

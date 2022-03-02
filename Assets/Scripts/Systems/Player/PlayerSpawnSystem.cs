@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Leopotam.Ecs;
 
@@ -40,6 +41,10 @@ namespace PewPew.Systems.Player
             entity.Get<VelocityComponent>() = new VelocityComponent { value = Vector3.zero };
             entity.Get<InputAxisComponent>();
             entity.Get<CameraTargetTag>();
+            entity.Get<InventoryComponent>() = new InventoryComponent
+            {
+                items = new List<InventoryItemComponent>()
+            };
 
             _runtimeData.PlayerEntity = entity;
         }

@@ -1,9 +1,7 @@
 using Leopotam.Ecs;
 
-using PewPew.Components;
 using PewPew.Components.Common;
 using PewPew.Components.Events;
-using PewPew.Components.Input;
 using PewPew.UnityComponents;
 
 namespace PewPew.Systems.PickUpItem
@@ -44,8 +42,6 @@ namespace PewPew.Systems.PickUpItem
                 rotation = pickUpItemData.transform.rotation,
                 parent = null,
             };
-            entity.Get<RotationComponent>() = new RotationComponent { value = pickUpItemData.transform.rotation };
-            entity.Get<InputAxisComponent>();
         }
 
         public void Init()
