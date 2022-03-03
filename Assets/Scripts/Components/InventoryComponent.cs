@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Leopotam.Ecs;
 
 namespace PewPew.Components
 {

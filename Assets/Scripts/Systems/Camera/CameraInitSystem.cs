@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Leopotam.Ecs;
 
@@ -7,7 +6,6 @@ using PewPew.Components.Camera;
 using PewPew.Components.Events;
 using PewPew.Components.Input;
 using PewPew.UnityComponents;
-using PewPew.UnityComponents.MonoLinks;
 
 namespace PewPew.Systems.Camera
 {

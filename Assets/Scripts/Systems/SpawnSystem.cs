@@ -2,7 +2,6 @@ using Leopotam.Ecs;
 
 using PewPew.Components.Common;
 using PewPew.Lib.Factories;
-using PewPew.UnityComponents;
 
 namespace PewPew.Systems
 {

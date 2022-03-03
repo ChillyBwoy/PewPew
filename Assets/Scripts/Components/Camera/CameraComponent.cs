@@ -1,6 +1,4 @@
 using System;
-using Cinemachine;
-using UnityEngine;
 
 namespace PewPew.Components.Camera
 {
